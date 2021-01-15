@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.HttpURLConnection;
 import java.util.Objects;
 import javax.naming.AuthenticationException;
-import org.richardinnocent.feefo.api.AbstractFeefoApiClient;
 import org.richardinnocent.feefo.api.auth.AuthenticationProvider;
 import org.richardinnocent.feefo.api.auth.NoSessionAuthenticationProvider;
 import org.richardinnocent.feefo.api.mapping.FeefoApiObjectMapper;
@@ -31,7 +30,7 @@ public class FeefoApiClientImpl extends AbstractFeefoApiClient {
       AuthenticationProvider authenticationProvider, ObjectMapper objectMapper) {
     this.objectMapper = Objects.requireNonNull(objectMapper, "Object mapper is null");
     this.authenticationProvider = authenticationProvider == null ?
-        new NoSessionAuthenticationProvider() : authenticationProvider;
+        NoSessionAuthenticationProvider.getInstance() : authenticationProvider;
   }
 
   @Override

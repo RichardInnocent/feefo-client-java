@@ -1,34 +1,24 @@
 package org.richardinnocent.feefo.api.auth;
 
+import java.util.Objects;
 import org.richardinnocent.feefo.api.client.FeefoApiClient;
 import org.richardinnocent.feefo.api.auth.request.ApiAuthenticationRequest;
 import org.richardinnocent.feefo.api.auth.request.ApiAuthenticationResponse;
-import org.richardinnocent.feefo.api.auth.request.AuthenticationDto;
 
+/**
+ * An authentication provider that can generate a token on demand. Once a token has been generated,
+ * it is kept in memory until the token expires. On a subsequent call, a new authentication token
+ * will be retrieved.
+ */
 public class AutoRefreshAuthenticationProvider implements AuthenticationProvider {
 
-  private final String merchantIdentifier;
-  private final String username;
-  private final String password;
-  private final String apiKey;
+  private final ApiCredentials credentials;
 
   private AuthenticationToken currentToken;
 
-  public AutoRefreshAuthenticationProvider(String merchantIdentifier, String username, String password, String apiKey) {
-    this.merchantIdentifier = ensureNotEmpty(merchantIdentifier, "Merchant identifier");
-    this.username = ensureNotEmpty(username, "Username");
-    this.password = ensureNotEmpty(password, "Password");
-    this.apiKey = ensureNotEmpty(apiKey, "API key");
-  }
-
-  private String ensureNotEmpty(String input, String variableName) {
-    if (input == null) {
-      throw new NullPointerException(variableName + " cannot be null");
-    }
-    if (input.isEmpty()) {
-      throw new IllegalArgumentException(variableName + " cannot be empty");
-    }
-    return input;
+  public AutoRefreshAuthenticationProvider(ApiCredentials credentials)
+      throws NullPointerException {
+    this.credentials = Objects.requireNonNull(credentials, "Credentials must be specified");
   }
 
   @Override
@@ -40,17 +30,28 @@ public class AutoRefreshAuthenticationProvider implements AuthenticationProvider
   }
 
   private AuthenticationToken generateAuthenticationToken(FeefoApiClient apiClient) {
-    AuthenticationDto authenticationDto = new AuthenticationDto();
-    authenticationDto.setMerchantIdentifier(merchantIdentifier);
-    authenticationDto.setUsername(username);
-    authenticationDto.setPassword(password);
-    authenticationDto.setApiKey(apiKey);
-    ApiAuthenticationRequest request = new ApiAuthenticationRequest(authenticationDto);
-    ApiAuthenticationResponse response = apiClient.execute(request);
-    return toToken(response);
+    return toToken(apiClient.execute(new ApiAuthenticationRequest(credentials)));
   }
 
   private AuthenticationToken toToken(ApiAuthenticationResponse response) {
     return AuthenticationToken.of(response.getApiToken(), response.getExpiresTime());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    AutoRefreshAuthenticationProvider that = (AutoRefreshAuthenticationProvider) o;
+    return Objects.equals(credentials, that.credentials) && Objects
+        .equals(currentToken, that.currentToken);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(credentials, currentToken);
   }
 }

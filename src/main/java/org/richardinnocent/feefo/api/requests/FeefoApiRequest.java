@@ -35,12 +35,4 @@ public interface FeefoApiRequest<R> {
    */
   boolean requiresAuthentication();
 
-  /**
-   * If the request fails with an unauthorised response code, should the authentication token be
-   * refreshed and the request re-attempted once?
-   * @return {@code true} if the authorization token should be refreshed and the request
-   * re-attempted once if an unauthorized response is received from the Feefo API.
-   */
-  boolean refreshAuthenticationAndRetryIfUnauthorised();
-
 }

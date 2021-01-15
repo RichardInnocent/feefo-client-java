@@ -3,23 +3,43 @@ package org.richardinnocent.feefo.api.auth.request;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * The authentication repsonse from the Feefo API. This consists of an API token that should be sent
+ * with each subsequent request that requires authentication, and the expiration time of that token.
+ */
 public class ApiAuthenticationResponse {
 
   private String apiToken;
   private LocalDateTime expiresTime;
 
+  /**
+   * Gets the API token that can be sent with subsequent requests to authenticate.
+   * @return The API token that can be sent with subsequent requests to authenticate.
+   */
   public String getApiToken() {
     return apiToken;
   }
 
+  /**
+   * Sets the API token that can be sent with subsequent requests to authenticate.
+   * @param apiToken The API token that can be sent with subsequent requests to authenticate.
+   */
   public void setApiToken(String apiToken) {
     this.apiToken = apiToken;
   }
 
+  /**
+   * Gets the expiration time of the token.
+   * @return The expiration time of the token.
+   */
   public LocalDateTime getExpiresTime() {
     return expiresTime;
   }
 
+  /**
+   * Sets the expiration time of the token.
+   * @param expiresTime The expiration time of the token.
+   */
   public void setExpiresTime(LocalDateTime expiresTime) {
     this.expiresTime = expiresTime;
   }
