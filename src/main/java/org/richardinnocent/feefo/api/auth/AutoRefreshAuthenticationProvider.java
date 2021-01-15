@@ -16,6 +16,13 @@ public class AutoRefreshAuthenticationProvider implements AuthenticationProvider
 
   private AuthenticationToken currentToken;
 
+  /**
+   * Creates an authentication provider that can generate a token on demand. Once a token has been
+   * generated, it is kept in memory until the token expires. On a subsequent call, a new
+   * authentication token will be retrieved.
+   * @param credentials The credentials used to generate tokens.
+   * @throws NullPointerException Thrown if {@code credentials == null}.
+   */
   public AutoRefreshAuthenticationProvider(ApiCredentials credentials)
       throws NullPointerException {
     this.credentials = Objects.requireNonNull(credentials, "Credentials must be specified");
