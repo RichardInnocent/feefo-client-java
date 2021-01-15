@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api;
+package org.richardinnocent.feefo.api.client;
 
 import org.richardinnocent.feefo.api.requests.FeefoApiRequest;
 

@@ -18,17 +18,12 @@ public class ReviewsNpsRequest extends FeefoApiGetRequest<Map<String, ?>> {
 
   @Override
   public String getBasePath() {
-    return "reviews/nps";
+    return "/10/reviews/nps";
   }
 
   @Override
   protected Map<String, String> getRequestParameters() {
     return Collections.singletonMap("merchant_identifier", merchantIdentifier);
-  }
-
-  @Override
-  public boolean isVersioned() {
-    return true;
   }
 
   @Override

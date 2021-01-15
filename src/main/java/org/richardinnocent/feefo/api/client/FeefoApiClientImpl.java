@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.v10;
+package org.richardinnocent.feefo.api.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.HttpURLConnection;
@@ -32,16 +32,6 @@ public class FeefoApiClientImpl extends AbstractFeefoApiClient {
     this.objectMapper = Objects.requireNonNull(objectMapper, "Object mapper is null");
     this.authenticationProvider = authenticationProvider == null ?
         new NoSessionAuthenticationProvider() : authenticationProvider;
-  }
-
-  @Override
-  public String getVersion() {
-    return "10";
-  }
-
-  @Override
-  public String getVersionedUrl() {
-    return getBaseUrl() + getVersion() + '/';
   }
 
   @Override

@@ -13,7 +13,7 @@ public class ApiAuthenticationRequest extends
 
   @Override
   protected String getBasePath() {
-    return "apiauthenticate";
+    return "/apiauthenticate";
   }
 
   @Override
@@ -28,12 +28,12 @@ public class ApiAuthenticationRequest extends
   }
 
   @Override
-  public boolean isVersioned() {
+  public boolean requiresAuthentication() {
     return false;
   }
 
   @Override
-  public boolean requiresAuthentication() {
+  public boolean refreshAuthenticationAndRetryIfUnauthorised() {
     return false;
   }
 }

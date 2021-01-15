@@ -5,26 +5,21 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.naming.AuthenticationException;
+import org.richardinnocent.feefo.api.client.FeefoApiClient;
 import org.richardinnocent.feefo.api.requests.FeefoApiRequest;
 
-public abstract class AbstractFeefoApiClient implements FeefoVersionedApiClient {
-
-  @Override
-  public String getVersionedUrl() {
-    return getBaseUrl() + getVersion() + '/';
-  }
+public abstract class AbstractFeefoApiClient implements FeefoApiClient {
 
   @Override
   public String getBaseUrl() {
-    return "https://api.feefo.com/api/";
+    return "https://api.feefo.com/api";
   }
 
   protected abstract ObjectMapper getObjectMapper();
 
   @Override
   public <R> R execute(FeefoApiRequest<R> request) {
-    String urlAsText =
-        (request.isVersioned() ? getVersionedUrl() : getBaseUrl()) + request.getPath();
+    String urlAsText = getBaseUrl() + request.getPath();
     try {
       URL url = new URL(urlAsText);
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();

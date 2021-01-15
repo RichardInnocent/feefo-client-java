@@ -1,6 +1,6 @@
 package org.richardinnocent.feefo.api.auth;
 
-import org.richardinnocent.feefo.api.FeefoApiClient;
+import org.richardinnocent.feefo.api.client.FeefoApiClient;
 import org.richardinnocent.feefo.api.auth.request.ApiAuthenticationRequest;
 import org.richardinnocent.feefo.api.auth.request.ApiAuthenticationResponse;
 import org.richardinnocent.feefo.api.auth.request.AuthenticationDto;

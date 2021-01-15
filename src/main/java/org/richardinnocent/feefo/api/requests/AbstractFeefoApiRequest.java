@@ -57,6 +57,11 @@ public abstract class AbstractFeefoApiRequest<R> implements FeefoApiRequest<R> {
     }
   }
 
+  @Override
+  public boolean refreshAuthenticationAndRetryIfUnauthorised() {
+    return true;
+  }
+
   protected abstract String getBasePath();
 
   protected abstract Map<String, String> getRequestParameters();
