@@ -38,6 +38,12 @@ public class ApiAuthenticationRequest extends
     return Collections.emptyMap();
   }
 
+  /**
+   * Creates a new request that attempts to retrieve an authorization token from the Feefo API that
+   * can then be used to authorize subsequent requests.
+   * @param credentials The credentials required to generate the authorization token.
+   * @see ApiAuthenticationRequest
+   */
   public ApiAuthenticationRequest(ApiCredentials credentials) {
     super(
         Collections.singletonMap("authenticationDTO", toDto(credentials)), RESPONSE_TYPE_REFERENCE
