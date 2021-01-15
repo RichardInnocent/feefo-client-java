@@ -36,7 +36,7 @@ public class FeefoApiClientImpl extends AbstractFeefoApiClient {
   @Override
   protected void configureAuthentication(HttpURLConnection connection)
       throws AuthenticationException {
-    String authenticationToken = authenticationProvider.getAuthenticationToken(this);
+    String authenticationToken = authenticationProvider.getAuthorizationToken(this);
     if (authenticationToken == null) {
       throw new AuthenticationException(
           "Authentication is required for this service, but no authentication has been provided to "

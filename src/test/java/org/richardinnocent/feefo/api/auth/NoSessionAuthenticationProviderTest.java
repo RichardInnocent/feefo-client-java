@@ -12,7 +12,7 @@ public class NoSessionAuthenticationProviderTest {
   public void getAuthenticationToken_Always_ReturnsNull() {
     assertNull(
         NoSessionAuthenticationProvider
-            .getInstance().getAuthenticationToken(mock(FeefoApiClient.class))
+            .getInstance().getAuthorizationToken(mock(FeefoApiClient.class))
     );
   }
 

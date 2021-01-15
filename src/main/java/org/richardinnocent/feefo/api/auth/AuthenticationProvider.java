@@ -13,6 +13,6 @@ public interface AuthenticationProvider {
    * @param apiClient The Feefo API client. This is used if the API is used to generate the token.
    * @return A valid authentication token, or {@code null}.
    */
-  String getAuthenticationToken(FeefoApiClient apiClient);
+  String getAuthorizationToken(FeefoApiClient apiClient);
 
 }

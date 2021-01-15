@@ -22,7 +22,7 @@ public class AutoRefreshAuthenticationProvider implements AuthenticationProvider
   }
 
   @Override
-  public synchronized String getAuthenticationToken(FeefoApiClient apiClient) {
+  public synchronized String getAuthorizationToken(FeefoApiClient apiClient) {
     if (currentToken == null || currentToken.hasExpired()) {
       this.currentToken = generateAuthenticationToken(apiClient);
     }

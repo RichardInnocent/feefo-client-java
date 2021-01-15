@@ -24,7 +24,7 @@ public class NoSessionAuthenticationProvider implements AuthenticationProvider {
   private NoSessionAuthenticationProvider() {}
 
   @Override
-  public String getAuthenticationToken(FeefoApiClient apiClient) {
+  public String getAuthorizationToken(FeefoApiClient apiClient) {
     return null;
   }
 }

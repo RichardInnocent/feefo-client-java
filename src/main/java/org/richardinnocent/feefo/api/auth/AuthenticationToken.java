@@ -40,7 +40,7 @@ public final class AuthenticationToken {
    * @return {@code true} if the token has expired.
    */
   public boolean hasExpired() {
-    return expirationTime.compareTo(LocalDateTime.now()) > 0;
+    return expirationTime.compareTo(LocalDateTime.now()) < 0;
   }
 
   /**
