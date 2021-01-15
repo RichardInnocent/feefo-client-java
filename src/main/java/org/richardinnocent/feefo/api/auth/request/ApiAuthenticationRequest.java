@@ -11,15 +11,20 @@ public class ApiAuthenticationRequest extends
   private static final TypeReference<ApiAuthenticationResponse> RESPONSE_TYPE_REFERENCE =
       new TypeReference<ApiAuthenticationResponse>() {};
 
+  @Override
+  protected String getBasePath() {
+    return "apiauthenticate";
+  }
+
+  @Override
+  protected Map<String, String> getRequestParameters() {
+    return Collections.emptyMap();
+  }
+
   public ApiAuthenticationRequest(AuthenticationDto authenticationDto) {
     super(
         Collections.singletonMap("authenticationDTO", authenticationDto), RESPONSE_TYPE_REFERENCE
     );
-  }
-
-  @Override
-  public String getPath() {
-    return "apiauthenticate";
   }
 
   @Override
