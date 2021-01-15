@@ -3,6 +3,7 @@ package org.richardinnocent.feefo.api.auth.request;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import org.richardinnocent.feefo.api.auth.ApiCredentials;
 import org.richardinnocent.feefo.api.requests.FeefoApiPostRequest;
 
@@ -28,6 +29,29 @@ public class ApiAuthenticationRequest extends
   private static final TypeReference<ApiAuthenticationResponse> RESPONSE_TYPE_REFERENCE =
       new TypeReference<ApiAuthenticationResponse>() {};
 
+  /**
+   * Creates a new request that attempts to retrieve an authorization token from the Feefo API that
+   * can then be used to authorize subsequent requests.
+   * @param credentials The credentials required to generate the authorization token.
+   * @throws NullPointerException Thrown if {@code credentials == null}.
+   * @see ApiAuthenticationRequest
+   */
+  public ApiAuthenticationRequest(ApiCredentials credentials) throws NullPointerException {
+    super(
+        Collections.singletonMap("authenticationDTO", toDto(credentials)), RESPONSE_TYPE_REFERENCE
+    );
+  }
+
+  private static ApiAuthenticationRequestDto toDto(ApiCredentials credentials) {
+    Objects.requireNonNull(credentials, "Credentials must be provided to generate a token");
+    ApiAuthenticationRequestDto dto = new ApiAuthenticationRequestDto();
+    dto.setMerchantIdentifier(credentials.getMerchantIdentifier());
+    dto.setApiKey(credentials.getApiKey());
+    dto.setUsername(credentials.getUsername());
+    dto.setPassword(credentials.getPassword());
+    return dto;
+  }
+
   @Override
   protected String getBasePath() {
     return "/apiauthenticate";
@@ -36,27 +60,6 @@ public class ApiAuthenticationRequest extends
   @Override
   protected Map<String, String> getRequestParameters() {
     return Collections.emptyMap();
-  }
-
-  /**
-   * Creates a new request that attempts to retrieve an authorization token from the Feefo API that
-   * can then be used to authorize subsequent requests.
-   * @param credentials The credentials required to generate the authorization token.
-   * @see ApiAuthenticationRequest
-   */
-  public ApiAuthenticationRequest(ApiCredentials credentials) {
-    super(
-        Collections.singletonMap("authenticationDTO", toDto(credentials)), RESPONSE_TYPE_REFERENCE
-    );
-  }
-
-  private static ApiAuthenticationRequestDto toDto(ApiCredentials credentials) {
-    ApiAuthenticationRequestDto dto = new ApiAuthenticationRequestDto();
-    dto.setMerchantIdentifier(credentials.getMerchantIdentifier());
-    dto.setApiKey(credentials.getApiKey());
-    dto.setUsername(credentials.getUsername());
-    dto.setPassword(credentials.getPassword());
-    return dto;
   }
 
   @Override

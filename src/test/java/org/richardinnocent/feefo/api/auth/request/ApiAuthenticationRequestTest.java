@@ -15,7 +15,37 @@ import org.richardinnocent.feefo.api.auth.ApiCredentials;
 public class ApiAuthenticationRequestTest {
 
   @Test
-  public void builderBuild_ValidObject_ReturnsRequest() throws Exception {
+  public void constructor_CredentialsAreNull_ExceptionThrown() {
+    try {
+      new ApiAuthenticationRequest(null);
+      fail("No exception thrown");
+    } catch (NullPointerException e) {
+      assertEquals("Credentials must be provided to generate a token", e.getMessage());
+    }
+  }
+
+  @Test
+  public void getBasePath_Always_Correct() {
+    assertEquals(
+        "/apiauthenticate",
+        new ApiAuthenticationRequest(mock(ApiCredentials.class)).getBasePath()
+    );
+  }
+
+  @Test
+  public void getRequestParameters_Always_Empty() {
+    assertTrue(
+        new ApiAuthenticationRequest(mock(ApiCredentials.class)).getRequestParameters().isEmpty()
+    );
+  }
+
+  @Test
+  public void requiresAuthentication_Always_ReturnsFalse() {
+    assertFalse(new ApiAuthenticationRequest(mock(ApiCredentials.class)).requiresAuthentication());
+  }
+
+  @Test
+  public void constructor_CredentialsProvided_ReturnsAppropriateRequest() throws Exception {
     ApiCredentials credentials =
         ApiCredentials
             .builder()
