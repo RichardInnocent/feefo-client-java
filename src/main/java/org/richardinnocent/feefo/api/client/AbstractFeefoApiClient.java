@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 import javax.naming.AuthenticationException;
 import org.richardinnocent.feefo.api.FeefoApiRequestFailedException;
 import org.richardinnocent.feefo.api.requests.FeefoApiRequest;
@@ -13,9 +14,15 @@ import org.richardinnocent.feefo.api.requests.FeefoApiRequest;
  */
 public abstract class AbstractFeefoApiClient implements FeefoApiClient {
 
+  private final String baseUrl;
+
+  protected AbstractFeefoApiClient(String baseUrl) {
+    this.baseUrl = Objects.requireNonNull(baseUrl, "Base URL is null");
+  }
+
   @Override
   public String getBaseUrl() {
-    return "https://api.feefo.com/api";
+    return baseUrl;
   }
 
   /**

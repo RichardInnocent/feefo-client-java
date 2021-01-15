@@ -10,6 +10,8 @@ import org.richardinnocent.feefo.api.mapping.FeefoApiObjectMapper;
 
 public class FeefoApiClientImpl extends AbstractFeefoApiClient {
 
+  private static final String DEFAULT_BASE_URL = "https://api.feefo.com/api";
+
   private final AuthenticationProvider authenticationProvider;
   private final ObjectMapper objectMapper;
 
@@ -19,15 +21,16 @@ public class FeefoApiClientImpl extends AbstractFeefoApiClient {
   }
 
   public FeefoApiClientImpl() {
-    this(null, null);
+    this(DEFAULT_BASE_URL, null, null);
   }
 
   public FeefoApiClientImpl(AuthenticationProvider authenticationProvider) {
-    this(authenticationProvider, new FeefoApiObjectMapper());
+    this(DEFAULT_BASE_URL, authenticationProvider, new FeefoApiObjectMapper());
   }
 
   public FeefoApiClientImpl(
-      AuthenticationProvider authenticationProvider, ObjectMapper objectMapper) {
+      String baseUrl, AuthenticationProvider authenticationProvider, ObjectMapper objectMapper) {
+    super(baseUrl);
     this.objectMapper = Objects.requireNonNull(objectMapper, "Object mapper is null");
     this.authenticationProvider = authenticationProvider == null ?
         NoSessionAuthenticationProvider.getInstance() : authenticationProvider;
