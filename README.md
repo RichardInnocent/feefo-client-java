@@ -1,0 +1,2 @@
+# Feefo API
+Work in progress to deliver a lightweight library to interact with the [Feefo Reviews API](https://support.feefo.com/support/solutions/articles/8000040941-reviews-api-customisable-integration-).
