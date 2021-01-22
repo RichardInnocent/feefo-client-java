@@ -12,16 +12,24 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Responsible for serialising/deserialising dates/times sent in/from requests and responses to/from
+ * the Feefo API.
+ */
 public class FeefoTimeModule extends SimpleModule {
 
   private static final FeefoTimeModule INSTANCE = new FeefoTimeModule();
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-  FeefoTimeModule() {
+  private FeefoTimeModule() {
     addSerializer(new LocalDateTimeSerializer());
     addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
   }
 
+  /**
+   * Gets the module singleton instance.
+   * @return The module singleton instance.
+   */
   public static FeefoTimeModule getInstance() {
     return INSTANCE;
   }
