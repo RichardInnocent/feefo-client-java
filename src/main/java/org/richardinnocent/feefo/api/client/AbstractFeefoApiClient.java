@@ -3,7 +3,6 @@ package org.richardinnocent.feefo.api.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.FeefoApiRequestFailedException;
 import org.richardinnocent.feefo.api.UnauthorisedException;
@@ -15,9 +14,13 @@ import org.richardinnocent.feefo.api.requests.FeefoApiRequest;
 public abstract class AbstractFeefoApiClient implements FeefoApiClient {
 
   private final String baseUrl;
+  private final HttpConnectionFactory httpConnectionFactory;
 
-  protected AbstractFeefoApiClient(String baseUrl) {
+  protected AbstractFeefoApiClient(String baseUrl, HttpConnectionFactory httpConnectionFactory)
+      throws NullPointerException {
     this.baseUrl = Objects.requireNonNull(baseUrl, "Base URL is null");
+    this.httpConnectionFactory =
+        Objects.requireNonNull(httpConnectionFactory, "HTTP connection factory is null");
   }
 
   @Override
@@ -34,10 +37,9 @@ public abstract class AbstractFeefoApiClient implements FeefoApiClient {
 
   @Override
   public <R> R execute(FeefoApiRequest<R> request) throws FeefoApiRequestFailedException {
-    String urlAsText = getBaseUrl() + request.getPath();
+    String url = getBaseUrl() + request.getPath();
     try {
-      URL url = new URL(urlAsText);
-      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+      HttpURLConnection connection = httpConnectionFactory.create(url);
       if (request.requiresAuthentication()) {
         configureAuthentication(connection);
       }
@@ -48,7 +50,7 @@ public abstract class AbstractFeefoApiClient implements FeefoApiClient {
       return getObjectMapper().readValue(response, request.getResponseTypeReference());
     } catch (Exception e) {
       throw new FeefoApiRequestFailedException(
-          "Request to Feefo API failed. Target URL: " + urlAsText, e);
+          "Request to Feefo API failed. Target URL: " + url, e);
     }
   }
 
