@@ -22,8 +22,10 @@ public abstract class AbstractFeefoApiRequest<R> implements FeefoApiRequest<R> {
   /**
    * Creates a new request.
    * @param responseTypeReference The type reference of the response.
+   * @throws NullPointerException Thrown if {@code responseTypeReference == null}.
    */
-  protected AbstractFeefoApiRequest(TypeReference<R> responseTypeReference) {
+  protected AbstractFeefoApiRequest(TypeReference<R> responseTypeReference)
+      throws NullPointerException {
     this.responseTypeReference =
         Objects.requireNonNull(responseTypeReference, "Response type reference is null");
   }
