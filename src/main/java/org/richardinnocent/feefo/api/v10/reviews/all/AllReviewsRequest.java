@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.v10.nps;
+package org.richardinnocent.feefo.api.v10.reviews.all;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Collections;
@@ -6,19 +6,19 @@ import java.util.Map;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.requests.FeefoApiGetRequest;
 
-public class ReviewsNpsRequest extends FeefoApiGetRequest<Map<String, ?>> {
+public class AllReviewsRequest extends FeefoApiGetRequest<ReviewsNpsResponse> {
 
   private final String merchantIdentifier;
 
-  public ReviewsNpsRequest(String merchantIdentifier) {
-    super(new TypeReference<Map<String, ?>>(){});
+  public AllReviewsRequest(String merchantIdentifier) {
+    super(new TypeReference<ReviewsNpsResponse>(){});
     this.merchantIdentifier =
         Objects.requireNonNull(merchantIdentifier, "Merchant identifier must be specified");
   }
 
   @Override
   public String getBasePath() {
-    return "/10/reviews/nps";
+    return "/10/reviews/all";
   }
 
   @Override
@@ -28,6 +28,6 @@ public class ReviewsNpsRequest extends FeefoApiGetRequest<Map<String, ?>> {
 
   @Override
   public boolean requiresAuthentication() {
-    return true;
+    return false;
   }
 }
