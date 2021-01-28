@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.HttpURLConnection;
 
+/**
+ * A request to be sent to the Feefo API.
+ * @param <R> The response type.
+ */
 public interface FeefoApiRequest<R> {
 
   /**
