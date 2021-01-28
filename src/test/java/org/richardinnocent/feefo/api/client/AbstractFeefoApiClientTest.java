@@ -5,10 +5,12 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.richardinnocent.feefo.api.FeefoApiRequestFailedException;
@@ -95,6 +97,73 @@ class AbstractFeefoApiClientTest {
     assertEquals(response, client.execute(request));
     verify(request, times(1)).configureConnection(httpConnection, objectMapper);
     verify(httpConnection, times(1)).setRequestProperty("authorised", "true");
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void execute_ServerRespondsWithErrorWithMessage_ExceptionIsThrown() throws Exception {
+    HttpURLConnection httpConnection = mock(HttpURLConnection.class);
+    when(httpConnection.getResponseCode()).thenReturn(400);
+    HttpConnectionFactory httpConnectionFactory = url -> httpConnection;
+    ObjectMapper objectMapper = mock(ObjectMapper.class);
+
+    FeefoApiClient client =
+        new TestFeefoApiClient(
+            "baseUrl", objectMapper, mock(Consumer.class), httpConnectionFactory);
+
+    FeefoApiRequest<Object> request = mock(FeefoApiRequest.class);
+    when(request.getPath()).thenReturn("/testPath");
+    when(request.requiresAuthentication()).thenReturn(false);
+    when(request.getResponseTypeReference()).thenReturn(new TypeReference<Object>(){});
+
+    String responseMessage = "Test response message";
+    String responseBodyContent = "Test response body";
+    when(httpConnection.getResponseMessage()).thenReturn(responseMessage);
+    InputStream responseInputStream =
+        new ByteArrayInputStream(responseBodyContent.getBytes(StandardCharsets.UTF_8));
+    when(httpConnection.getErrorStream()).thenReturn(responseInputStream);
+
+    try {
+      client.execute(request);
+    } catch (FeefoApiRequestFailedException e) {
+      assertEquals("Request to Feefo API failed. Target URL: " + client.getBaseUrl() + request.getPath(), e.getMessage());
+      Throwable cause = e.getCause();
+      assertTrue(cause instanceof FeefoApiRequestFailedException);
+      assertEquals(
+          "Request failed with status " + responseMessage + ". Cause: " + responseBodyContent,
+          cause.getMessage()
+      );
+    }
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void execute_ServerRespondsWithErrorWithoutMessage_ExceptionIsThrown() throws Exception {
+    HttpURLConnection httpConnection = mock(HttpURLConnection.class);
+    when(httpConnection.getResponseCode()).thenReturn(400);
+    HttpConnectionFactory httpConnectionFactory = url -> httpConnection;
+    ObjectMapper objectMapper = mock(ObjectMapper.class);
+
+    FeefoApiClient client =
+        new TestFeefoApiClient(
+            "baseUrl", objectMapper, mock(Consumer.class), httpConnectionFactory);
+
+    FeefoApiRequest<Object> request = mock(FeefoApiRequest.class);
+    when(request.getPath()).thenReturn("/testPath");
+    when(request.requiresAuthentication()).thenReturn(false);
+    when(request.getResponseTypeReference()).thenReturn(new TypeReference<Object>(){});
+
+    String responseMessage = "Test response message";
+    when(httpConnection.getResponseMessage()).thenReturn(responseMessage);
+
+    try {
+      client.execute(request);
+    } catch (FeefoApiRequestFailedException e) {
+      assertEquals("Request to Feefo API failed. Target URL: " + client.getBaseUrl() + request.getPath(), e.getMessage());
+      Throwable cause = e.getCause();
+      assertTrue(cause instanceof FeefoApiRequestFailedException);
+      assertEquals("Request failed with status " + responseMessage, cause.getMessage());
+    }
   }
 
   private static class TestFeefoApiClient extends AbstractFeefoApiClient {

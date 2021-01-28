@@ -1,8 +1,13 @@
 package org.richardinnocent.feefo.api.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.FeefoApiRequestFailedException;
 import org.richardinnocent.feefo.api.UnauthorisedException;
@@ -46,12 +51,39 @@ public abstract class AbstractFeefoApiClient implements FeefoApiClient {
 
       request.configureConnection(connection, getObjectMapper());
 
-      InputStream response = connection.getInputStream();
-      return getObjectMapper().readValue(response, request.getResponseTypeReference());
+      connection.connect();
+      int responseCode = connection.getResponseCode();
+
+      if (responseCode < 400) {
+        InputStream response = connection.getInputStream();
+        return getObjectMapper().readValue(response, request.getResponseTypeReference());
+      } else {
+        throw createExceptionForResponse(connection);
+      }
+
     } catch (Exception e) {
       throw new FeefoApiRequestFailedException(
           "Request to Feefo API failed. Target URL: " + url, e);
     }
+  }
+
+  private FeefoApiRequestFailedException createExceptionForResponse(HttpURLConnection connection)
+      throws IOException {
+    String exceptionMessage = "Request failed with status " + connection.getResponseMessage();
+
+    InputStream responseStream = connection.getErrorStream();
+    if (responseStream != null) {
+      Collection<String> lines = new ArrayList<>();
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          lines.add(line);
+        }
+      }
+      exceptionMessage += ". Cause: " + String.join(System.lineSeparator(), lines);
+    }
+
+    return new FeefoApiRequestFailedException(exceptionMessage);
   }
 
   /**
