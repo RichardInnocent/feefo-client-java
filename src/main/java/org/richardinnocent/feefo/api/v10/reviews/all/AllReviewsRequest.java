@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.requests.FeefoApiGetRequest;
 
-public class AllReviewsRequest extends FeefoApiGetRequest<ReviewsNpsResponse> {
+public class AllReviewsRequest extends FeefoApiGetRequest<AllReviewsResponse> {
 
   private final String merchantIdentifier;
 
   public AllReviewsRequest(String merchantIdentifier) {
-    super(new TypeReference<ReviewsNpsResponse>(){});
+    super(new TypeReference<AllReviewsResponse>(){});
     this.merchantIdentifier =
         Objects.requireNonNull(merchantIdentifier, "Merchant identifier must be specified");
   }
