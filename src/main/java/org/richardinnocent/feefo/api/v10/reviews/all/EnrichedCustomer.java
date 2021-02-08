@@ -3,7 +3,7 @@ package org.richardinnocent.feefo.api.v10.reviews.all;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
-public class Customer {
+public class EnrichedCustomer {
 
   @JsonProperty("display_name")
   private String displayName;
@@ -88,7 +88,7 @@ public class Customer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Customer customer = (Customer) o;
+    EnrichedCustomer customer = (EnrichedCustomer) o;
     return Objects.equals(displayName, customer.displayName)
         && Objects.equals(displayLocation, customer.displayLocation)
         && Objects.equals(name, customer.name)

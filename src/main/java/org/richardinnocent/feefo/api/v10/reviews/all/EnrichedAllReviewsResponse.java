@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.v10.reviews.shared.Summary;
 
-public class AllReviewsResponse {
+public class EnrichedAllReviewsResponse {
 
   private Summary summary;
-  private final List<Review> reviews = new ArrayList<>();
+  private final List<EnrichedReview> reviews = new ArrayList<>();
 
   public Summary getSummary() {
     return summary;
@@ -18,11 +18,11 @@ public class AllReviewsResponse {
     this.summary = summary;
   }
 
-  public List<Review> getReviews() {
+  public List<EnrichedReview> getReviews() {
     return new ArrayList<>(reviews);
   }
 
-  public void setReviews(List<Review> reviews) {
+  public void setReviews(List<EnrichedReview> reviews) {
     this.reviews.clear();
     if (reviews != null) {
       this.reviews.addAll(reviews);
@@ -37,7 +37,7 @@ public class AllReviewsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AllReviewsResponse that = (AllReviewsResponse) o;
+    EnrichedAllReviewsResponse that = (EnrichedAllReviewsResponse) o;
     return Objects.equals(summary, that.summary) && Objects
         .equals(reviews, that.reviews);
   }

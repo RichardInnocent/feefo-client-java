@@ -5,14 +5,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.richardinnocent.feefo.api.v10.reviews.shared.NetPromoterScore;
 import org.richardinnocent.feefo.api.v10.reviews.shared.Merchant;
-import org.richardinnocent.feefo.api.v10.reviews.shared.ProductFeedback;
-import org.richardinnocent.feefo.api.v10.reviews.shared.ServiceFeedback;
+import org.richardinnocent.feefo.api.v10.reviews.shared.EnrichedProductFeedback;
+import org.richardinnocent.feefo.api.v10.reviews.shared.EnrichedServiceFeedback;
 import org.richardinnocent.feefo.api.v10.reviews.shared.SocialNetworks;
-import org.richardinnocent.feefo.api.v10.reviews.shared.Tag;
 
-public class Review {
+public class SimpleReview {
 
   private Merchant merchant;
 
@@ -22,23 +20,18 @@ public class Review {
   @JsonProperty("products_purchased")
   private final List<String> productsPurchased = new ArrayList<>();
 
-  private final List<Tag> tags = new ArrayList<>();
-
   private String url;
 
   @JsonProperty("social")
   private SocialNetworks socialNetworks;
 
-  private Customer customer;
+  private SimpleCustomer customer;
 
   @JsonProperty("service")
-  private ServiceFeedback serviceFeedback;
+  private EnrichedServiceFeedback serviceFeedback;
 
   @JsonProperty("products")
-  private final List<ProductFeedback> productFeedback = new ArrayList<>();
-
-  @JsonProperty("nps")
-  private NetPromoterScore netPromoterScore;
+  private final List<EnrichedProductFeedback> productFeedback = new ArrayList<>();
 
   public Merchant getMerchant() {
     return merchant;
@@ -67,17 +60,6 @@ public class Review {
     }
   }
 
-  public List<Tag> getTags() {
-    return new ArrayList<>(tags);
-  }
-
-  public void setTags(List<Tag> tags) {
-    this.tags.clear();
-    if (tags != null) {
-      this.tags.addAll(tags);
-    }
-  }
-
   public String getUrl() {
     return url;
   }
@@ -94,39 +76,23 @@ public class Review {
     this.socialNetworks = socialNetworks;
   }
 
-  public Customer getCustomer() {
-    return customer;
-  }
-
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
-  }
-
-  public ServiceFeedback getServiceFeedback() {
+  public EnrichedServiceFeedback getServiceFeedback() {
     return serviceFeedback;
   }
 
-  public void setServiceFeedback(ServiceFeedback serviceFeedback) {
+  public void setServiceFeedback(EnrichedServiceFeedback serviceFeedback) {
     this.serviceFeedback = serviceFeedback;
   }
 
-  public List<ProductFeedback> getProductFeedback() {
+  public List<EnrichedProductFeedback> getProductFeedback() {
     return new ArrayList<>(productFeedback);
   }
 
-  public void setProductFeedback(List<ProductFeedback> productFeedback) {
+  public void setProductFeedback(List<EnrichedProductFeedback> productFeedback) {
     this.productFeedback.clear();
     if (productFeedback != null) {
       this.productFeedback.addAll(productFeedback);
     }
-  }
-
-  public NetPromoterScore getNetPromoterScore() {
-    return netPromoterScore;
-  }
-
-  public void setNetPromoterScore(NetPromoterScore netPromoterScore) {
-    this.netPromoterScore = netPromoterScore;
   }
 
   @Override
@@ -137,24 +103,22 @@ public class Review {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Review review = (Review) o;
+    SimpleReview review = (SimpleReview) o;
     return Objects.equals(merchant, review.merchant)
         && Objects.equals(lastUpdatedDate, review.lastUpdatedDate)
         && Objects.equals(productsPurchased, review.productsPurchased)
-        && Objects.equals(tags, review.tags)
         && Objects.equals(url, review.url)
         && Objects.equals(socialNetworks, review.socialNetworks)
         && Objects.equals(customer, review.customer)
         && Objects.equals(serviceFeedback, review.serviceFeedback)
-        && Objects.equals(productFeedback, review.productFeedback)
-        && Objects.equals(netPromoterScore, review.netPromoterScore);
+        && Objects.equals(productFeedback, review.productFeedback);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        merchant, lastUpdatedDate, productsPurchased, tags, url, socialNetworks, customer,
-        serviceFeedback, productFeedback, netPromoterScore
+        merchant, lastUpdatedDate, productsPurchased, url, socialNetworks, customer,
+        serviceFeedback, productFeedback
     );
   }
 

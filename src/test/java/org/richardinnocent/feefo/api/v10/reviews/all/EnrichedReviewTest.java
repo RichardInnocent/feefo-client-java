@@ -1,14 +1,14 @@
-package org.richardinnocent.feefo.api.v10.reviews.shared;
+package org.richardinnocent.feefo.api.v10.reviews.all;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class ProductTest {
+class EnrichedReviewTest {
 
   @Test
   public void equalsAndHashCode_Always_Valid() {
-    EqualsVerifier.forClass(EnrichedProduct.class)
+    EqualsVerifier.forClass(EnrichedReview.class)
                   .suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS)
                   .verify();
   }

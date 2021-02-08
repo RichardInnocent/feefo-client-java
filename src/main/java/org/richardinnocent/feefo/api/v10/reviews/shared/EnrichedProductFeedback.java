@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ProductFeedback extends Feedback {
+public class EnrichedProductFeedback extends EnrichedFeedback {
 
-  private Product product;
+  private EnrichedProduct product;
 
   @JsonProperty("thread")
   private final List<ProductThreadEntry> commentThread = new ArrayList<>();
 
-  public Product getProduct() {
+  public EnrichedProduct getProduct() {
     return product;
   }
 
-  public void setProduct(Product product) {
+  public void setProduct(EnrichedProduct product) {
     this.product = product;
   }
 
@@ -42,7 +42,7 @@ public class ProductFeedback extends Feedback {
     if (!super.equals(o)) {
       return false;
     }
-    ProductFeedback that = (ProductFeedback) o;
+    EnrichedProductFeedback that = (EnrichedProductFeedback) o;
     return Objects.equals(product, that.product)
         && Objects.equals(commentThread, that.commentThread);
   }

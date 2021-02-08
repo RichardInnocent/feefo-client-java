@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ServiceFeedback extends Feedback {
+public class SimpleServiceFeedback extends SimpleFeedback {
 
   private String title;
 
@@ -42,7 +42,7 @@ public class ServiceFeedback extends Feedback {
     if (!super.equals(o)) {
       return false;
     }
-    ServiceFeedback that = (ServiceFeedback) o;
+    SimpleServiceFeedback that = (SimpleServiceFeedback) o;
     return Objects.equals(title, that.title) && Objects.equals(commentThread, that.commentThread);
   }
 
@@ -50,4 +50,5 @@ public class ServiceFeedback extends Feedback {
   public int hashCode() {
     return Objects.hash(super.hashCode(), title, commentThread);
   }
+
 }

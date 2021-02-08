@@ -4,11 +4,11 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class ServiceFeedbackTest {
+class AuthenticatedServiceFeedbackTest {
 
   @Test
   public void equalsAndHashCode_Always_Valid() {
-    EqualsVerifier.forClass(ServiceFeedback.class)
+    EqualsVerifier.forClass(EnrichedServiceFeedback.class)
                   .suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS)
                   .verify();
   }

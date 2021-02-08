@@ -4,7 +4,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
-class ProductTest {
+class EnrichedProductTest {
 
   @Test
   public void equalsAndHashCode_Always_Valid() {

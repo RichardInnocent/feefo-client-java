@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Feedback {
+public abstract class EnrichedFeedback {
 
   private Rating rating;
   private String id;
@@ -102,7 +102,7 @@ public abstract class Feedback {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Feedback feedback = (Feedback) o;
+    EnrichedFeedback feedback = (EnrichedFeedback) o;
     return Objects.equals(helpfulVotes, feedback.helpfulVotes)
         && Objects.equals(rating, feedback.rating)
         && Objects.equals(id, feedback.id)

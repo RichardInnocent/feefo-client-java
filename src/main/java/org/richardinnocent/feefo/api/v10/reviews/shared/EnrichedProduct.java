@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Product {
+public class EnrichedProduct {
 
   private String title;
 
@@ -91,7 +91,7 @@ public class Product {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Product product = (Product) o;
+    EnrichedProduct product = (EnrichedProduct) o;
     return Objects.equals(title, product.title)
         && Objects.equals(parentSku, product.parentSku)
         && Objects.equals(sku, product.sku)

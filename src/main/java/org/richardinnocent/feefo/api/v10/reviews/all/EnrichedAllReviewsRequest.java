@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.requests.FeefoApiGetRequest;
 
-public class AllReviewsRequest extends FeefoApiGetRequest<AllReviewsResponse> {
+public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllReviewsResponse> {
 
   private final String merchantIdentifier;
 
-  public AllReviewsRequest(String merchantIdentifier) {
-    super(new TypeReference<AllReviewsResponse>(){});
+  public EnrichedAllReviewsRequest(String merchantIdentifier) throws NullPointerException {
+    super(new TypeReference<EnrichedAllReviewsResponse>(){});
     this.merchantIdentifier =
         Objects.requireNonNull(merchantIdentifier, "Merchant identifier must be specified");
   }
@@ -28,6 +28,6 @@ public class AllReviewsRequest extends FeefoApiGetRequest<AllReviewsResponse> {
 
   @Override
   public boolean requiresAuthentication() {
-    return false;
+    return true;
   }
 }
