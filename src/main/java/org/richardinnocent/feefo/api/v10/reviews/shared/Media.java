@@ -7,8 +7,7 @@ public class Media {
 
   private String id;
 
-  // TODO make this an enum
-  private String type;
+  private MediaType type;
 
   private String url;
 
@@ -30,11 +29,11 @@ public class Media {
     this.id = id;
   }
 
-  public String getType() {
+  public MediaType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(MediaType type) {
     this.type = type;
   }
 

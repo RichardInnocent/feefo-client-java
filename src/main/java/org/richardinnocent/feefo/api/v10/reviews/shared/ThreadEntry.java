@@ -9,8 +9,7 @@ public class ThreadEntry {
   @JsonProperty("created_at")
   private LocalDateTime creationTime;
 
-  // TODO convert to enum
-  private String type;
+  private ThreadType type;
 
   private String author;
 
@@ -36,11 +35,11 @@ public class ThreadEntry {
     this.creationTime = creationTime;
   }
 
-  public String getType() {
+  public ThreadType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(ThreadType type) {
     this.type = type;
   }
 
