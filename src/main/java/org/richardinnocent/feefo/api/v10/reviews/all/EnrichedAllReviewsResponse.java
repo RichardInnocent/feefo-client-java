@@ -3,7 +3,8 @@ package org.richardinnocent.feefo.api.v10.reviews.all;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.richardinnocent.feefo.api.v10.reviews.shared.Summary;
+import org.richardinnocent.feefo.api.v10.reviews.all.dto.EnrichedReview;
+import org.richardinnocent.feefo.api.v10.reviews.shared.dto.Summary;
 
 public class EnrichedAllReviewsResponse {
 
