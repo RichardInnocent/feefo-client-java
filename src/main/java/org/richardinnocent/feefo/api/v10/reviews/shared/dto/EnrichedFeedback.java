@@ -1,7 +1,7 @@
 package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +13,7 @@ public abstract class EnrichedFeedback {
   private String review;
 
   @JsonProperty("created_at")
-  private LocalDateTime creationTime;
+  private ZonedDateTime creationTime;
 
   @JsonProperty("helpful_votes")
   private Integer helpfulVotes;
@@ -48,11 +48,11 @@ public abstract class EnrichedFeedback {
     this.review = review;
   }
 
-  public LocalDateTime getCreationTime() {
+  public ZonedDateTime getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime(LocalDateTime creationTime) {
+  public void setCreationTime(ZonedDateTime creationTime) {
     this.creationTime = creationTime;
   }
 

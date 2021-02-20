@@ -8,8 +8,9 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -22,8 +23,8 @@ public class FeefoTimeModule extends SimpleModule {
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
   private FeefoTimeModule() {
-    addSerializer(new LocalDateTimeSerializer());
-    addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
+    addSerializer(new ZonedDateTimeSerializer());
+    addDeserializer(ZonedDateTime.class, new ZonedDateTimeDeserializer());
   }
 
   /**
@@ -34,26 +35,26 @@ public class FeefoTimeModule extends SimpleModule {
     return INSTANCE;
   }
 
-  private static class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
+  private static class ZonedDateTimeSerializer extends StdSerializer<ZonedDateTime> {
 
-    private LocalDateTimeSerializer() {
-      super(LocalDateTime.class);
+    private ZonedDateTimeSerializer() {
+      super(ZonedDateTime.class);
     }
 
     @Override
-    public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator,
+    public void serialize(ZonedDateTime zonedDateTime, JsonGenerator jsonGenerator,
                           SerializerProvider serializerProvider) throws IOException {
-      jsonGenerator.writeString(localDateTime.atOffset(ZoneOffset.UTC).format(DATE_TIME_FORMATTER));
+      jsonGenerator.writeString(zonedDateTime.format(DATE_TIME_FORMATTER));
     }
   }
 
-  private static class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
-    private LocalDateTimeDeserializer() {
-      super(LocalDateTime.class);
+  private static class ZonedDateTimeDeserializer extends StdDeserializer<ZonedDateTime> {
+    private ZonedDateTimeDeserializer() {
+      super(ZonedDateTime.class);
     }
 
     @Override
-    public LocalDateTime deserialize(JsonParser jsonParser,
+    public ZonedDateTime deserialize(JsonParser jsonParser,
                                      DeserializationContext deserializationContext)
         throws IOException {
       String value = jsonParser.getValueAsString();
@@ -64,14 +65,12 @@ public class FeefoTimeModule extends SimpleModule {
       return charSequence.chars().allMatch(Character::isDigit);
     }
 
-    private LocalDateTime getFromEpochTime(long millis) {
-      long seconds = millis / 1000L;
-      int nanos = (int) (millis % 1000L * 1000L);
-      return LocalDateTime.ofEpochSecond(seconds, nanos, ZoneOffset.UTC);
+    private ZonedDateTime getFromEpochTime(long millis) {
+      return ZonedDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"));
     }
 
-    private LocalDateTime getFromTimestamp(String timestamp) {
-      return LocalDateTime.parse(timestamp);
+    private ZonedDateTime getFromTimestamp(String timestamp) {
+      return ZonedDateTime.parse(timestamp);
     }
   }
 }

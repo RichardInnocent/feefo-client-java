@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
@@ -43,7 +45,7 @@ class AutoRefreshAuthenticationProviderTest {
 
     ApiAuthenticationResponse response = new ApiAuthenticationResponse();
     response.setApiToken("test-token");
-    response.setExpiresTime(LocalDateTime.MAX);
+    response.setExpiresTime(ZonedDateTime.of(10_000, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC")));
 
     FeefoApiClient client = mock(FeefoApiClient.class);
     when(client.execute(any(ApiAuthenticationRequest.class))).thenReturn(response);
@@ -66,7 +68,7 @@ class AutoRefreshAuthenticationProviderTest {
 
     ApiAuthenticationResponse response = new ApiAuthenticationResponse();
     response.setApiToken("test-token");
-    response.setExpiresTime(LocalDateTime.MAX);
+    response.setExpiresTime(ZonedDateTime.of(10_000, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC")));
 
     FeefoApiClient client = mock(FeefoApiClient.class);
     when(client.execute(any(ApiAuthenticationRequest.class))).thenReturn(response);
@@ -94,7 +96,7 @@ class AutoRefreshAuthenticationProviderTest {
 
     ApiAuthenticationResponse expiredResponse = new ApiAuthenticationResponse();
     expiredResponse.setApiToken("test-token");
-    expiredResponse.setExpiresTime(LocalDateTime.MIN); // expired token
+    expiredResponse.setExpiresTime(ZonedDateTime.of(0, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC")));
 
     FeefoApiClient client = mock(FeefoApiClient.class);
     when(client.execute(any(ApiAuthenticationRequest.class))).thenReturn(expiredResponse);
@@ -106,7 +108,7 @@ class AutoRefreshAuthenticationProviderTest {
 
     ApiAuthenticationResponse newResponse = new ApiAuthenticationResponse();
     newResponse.setApiToken("test-token-2");
-    newResponse.setExpiresTime(LocalDateTime.MAX); // expired token
+    newResponse.setExpiresTime(ZonedDateTime.of(10_000, 1, 1, 0, 0, 0, 0, ZoneId.of("UTC")));
 
     when(client.execute(any(ApiAuthenticationRequest.class))).thenReturn(newResponse);
 

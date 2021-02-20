@@ -1,7 +1,7 @@
 package org.richardinnocent.feefo.api.v10.reviews.all.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class SimpleReview {
   private Merchant merchant;
 
   @JsonProperty("last_updated_date")
-  private LocalDateTime lastUpdatedDate;
+  private ZonedDateTime lastUpdatedDate;
 
   @JsonProperty("products_purchased")
   private final List<String> productsPurchased = new ArrayList<>();
@@ -41,11 +41,11 @@ public class SimpleReview {
     this.merchant = merchant;
   }
 
-  public LocalDateTime getLastUpdatedDate() {
+  public ZonedDateTime getLastUpdatedDate() {
     return lastUpdatedDate;
   }
 
-  public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+  public void setLastUpdatedDate(ZonedDateTime lastUpdatedDate) {
     this.lastUpdatedDate = lastUpdatedDate;
   }
 
