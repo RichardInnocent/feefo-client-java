@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -66,7 +66,7 @@ public class FeefoTimeModule extends SimpleModule {
     }
 
     private OffsetDateTime getFromEpochTime(long millis) {
-      return OffsetDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"));
+      return OffsetDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneOffset.UTC);
     }
 
     private OffsetDateTime getFromTimestamp(String timestamp) {

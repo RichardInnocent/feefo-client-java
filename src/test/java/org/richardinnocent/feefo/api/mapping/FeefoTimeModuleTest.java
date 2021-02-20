@@ -27,7 +27,7 @@ class FeefoTimeModuleTest {
   }
 
   @Test
-  public void deserialize_OffsetDateTime_ValidDateTimeGenerated() throws JsonProcessingException {
+  public void deserialize_EpochTime_ValidDateTimeGenerated() throws JsonProcessingException {
     long millis = 1611333503023L;
     OffsetDateTime dateTime = OBJECT_MAPPER.readValue(Long.toString(millis), OffsetDateTime.class);
     assertEquals(2021, dateTime.getYear());
@@ -37,6 +37,19 @@ class FeefoTimeModuleTest {
     assertEquals(38, dateTime.getMinute());
     assertEquals(23, dateTime.getSecond());
     assertEquals(23_000_000, dateTime.getNano());
+  }
+
+  @Test
+  public void deserialize_Timestamp_ValidDateTimeGenerated() throws JsonProcessingException {
+    String timestamp = "\"2021-02-20T17:03:01.030Z\"";
+    OffsetDateTime dateTime = OBJECT_MAPPER.readValue(timestamp, OffsetDateTime.class);
+    assertEquals(2021, dateTime.getYear());
+    assertEquals(Month.FEBRUARY, dateTime.getMonth());
+    assertEquals(20, dateTime.getDayOfMonth());
+    assertEquals(17, dateTime.getHour());
+    assertEquals(3, dateTime.getMinute());
+    assertEquals(1, dateTime.getSecond());
+    assertEquals(30_000_000, dateTime.getNano());
   }
 
 }
