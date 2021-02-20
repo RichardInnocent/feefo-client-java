@@ -1,13 +1,13 @@
 package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class ThreadEntry {
 
   @JsonProperty("created_at")
-  private ZonedDateTime creationTime;
+  private OffsetDateTime creationTime;
 
   private ThreadType type;
 
@@ -27,11 +27,11 @@ public class ThreadEntry {
   @JsonProperty("new_title")
   private String newTitle;
 
-  public ZonedDateTime getCreationTime() {
+  public OffsetDateTime getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime(ZonedDateTime creationTime) {
+  public void setCreationTime(OffsetDateTime creationTime) {
     this.creationTime = creationTime;
   }
 

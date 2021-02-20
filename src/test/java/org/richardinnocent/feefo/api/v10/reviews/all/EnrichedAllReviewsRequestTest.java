@@ -3,8 +3,8 @@ package org.richardinnocent.feefo.api.v10.reviews.all;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -437,7 +437,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewCreationTimeAtExactly_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -463,7 +463,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewCreationTimeBefore_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -492,7 +492,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewCreationTimeAtOrBefore_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -522,7 +522,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewCreationAfter_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -551,7 +551,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewCreationTimeAtOrAfter_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -570,7 +570,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewUpdatedTimeAtExactly_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -596,7 +596,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewUpdatedTimeBefore_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -626,7 +626,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewUpdatedTimeAtOrBefore_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -658,7 +658,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewUpdatedAfter_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")
@@ -687,7 +687,7 @@ class EnrichedAllReviewsRequestTest {
 
   @Test
   public void builder$withReviewUpdatedTimeAtOrAfter_DateProvided_ParameterSet() {
-    ZonedDateTime dateTime = ZonedDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneId.of("UTC"));
+    OffsetDateTime dateTime = OffsetDateTime.of(2021, 2, 12, 20, 40, 0, 0, ZoneOffset.UTC);
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
         .builder()
         .forMerchant("test-merchant")

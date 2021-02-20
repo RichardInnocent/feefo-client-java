@@ -1,7 +1,7 @@
 package org.richardinnocent.feefo.api.v10.reviews.all;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -201,9 +201,9 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
 
       private final String merchantIdentifier;
       private final Collection<TagFilter> tagFilters = new ArrayList<>();
-      private final Collection<Comparison<ZonedDateTime>> reviewCreationTimeComparisons =
+      private final Collection<Comparison<OffsetDateTime>> reviewCreationTimeComparisons =
           new ArrayList<>(2);
-      private final Collection<Comparison<ZonedDateTime>> reviewUpdatedTimeComparisons =
+      private final Collection<Comparison<OffsetDateTime>> reviewUpdatedTimeComparisons =
           new ArrayList<>(2);
       private Comparison<String> reviewCreatedSinceComparison;
       private Comparison<String> reviewUpdatedSinceComparison;
@@ -296,7 +296,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
         return this;
       }
 
-      public FinalStageBuilder withReviewCreationTimeAtExactly(ZonedDateTime reviewCreationTime)
+      public FinalStageBuilder withReviewCreationTimeAtExactly(OffsetDateTime reviewCreationTime)
           throws NullPointerException {
         reviewCreationTimeComparisons.add(
             new Comparison<>(EqualityOperator.EQUALS, reviewCreationTime)
@@ -305,7 +305,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewCreationTimeBefore(
-          ZonedDateTime latestReviewCreationTime) throws NullPointerException {
+          OffsetDateTime latestReviewCreationTime) throws NullPointerException {
         reviewCreationTimeComparisons.add(
             new Comparison<>(EqualityOperator.LESS_THAN, latestReviewCreationTime)
         );
@@ -313,7 +313,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewCreationTimeAtOrBefore(
-          ZonedDateTime latestReviewCreationTime) throws NullPointerException {
+          OffsetDateTime latestReviewCreationTime) throws NullPointerException {
         reviewCreationTimeComparisons.add(
             new Comparison<>(EqualityOperator.LESS_THAN_OR_EQUAL_TO, latestReviewCreationTime)
         );
@@ -321,7 +321,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewCreationTimeAfter(
-          ZonedDateTime earliestReviewCreationTime) throws NullPointerException {
+          OffsetDateTime earliestReviewCreationTime) throws NullPointerException {
         reviewCreationTimeComparisons.add(
             new Comparison<>(EqualityOperator.GREATER_THAN, earliestReviewCreationTime)
         );
@@ -329,20 +329,20 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewCreationTimeAtOrAfter(
-          ZonedDateTime earliestReviewCreationTime) throws NullPointerException {
+          OffsetDateTime earliestReviewCreationTime) throws NullPointerException {
         reviewCreationTimeComparisons.add(
             new Comparison<>(EqualityOperator.GREATER_THAN_OR_EQUAL_TO, earliestReviewCreationTime)
         );
         return this;
       }
 
-      public FinalStageBuilder withReviewUpdatedTimeAtExactly(ZonedDateTime reviewUpdatedTime)
+      public FinalStageBuilder withReviewUpdatedTimeAtExactly(OffsetDateTime reviewUpdatedTime)
           throws NullPointerException {
         reviewUpdatedTimeComparisons.add(new Comparison<>(EqualityOperator.EQUALS, reviewUpdatedTime));
         return this;
       }
 
-      public FinalStageBuilder withReviewUpdatedTimeBefore(ZonedDateTime latestReviewUpdatedTime)
+      public FinalStageBuilder withReviewUpdatedTimeBefore(OffsetDateTime latestReviewUpdatedTime)
           throws NullPointerException {
         reviewUpdatedTimeComparisons.add(
             new Comparison<>(EqualityOperator.LESS_THAN, latestReviewUpdatedTime)
@@ -351,14 +351,14 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewUpdatedTimeAtOrBefore(
-          ZonedDateTime latestReviewUpdatedTime) throws NullPointerException {
+          OffsetDateTime latestReviewUpdatedTime) throws NullPointerException {
         reviewUpdatedTimeComparisons.add(
             new Comparison<>(EqualityOperator.LESS_THAN_OR_EQUAL_TO, latestReviewUpdatedTime)
         );
         return this;
       }
 
-      public FinalStageBuilder withReviewUpdatedTimeAfter(ZonedDateTime earliestReviewUpdatedTime)
+      public FinalStageBuilder withReviewUpdatedTimeAfter(OffsetDateTime earliestReviewUpdatedTime)
           throws NullPointerException {
         reviewUpdatedTimeComparisons.add(
             new Comparison<>(EqualityOperator.GREATER_THAN, earliestReviewUpdatedTime)
@@ -367,7 +367,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       }
 
       public FinalStageBuilder withReviewUpdatedTimeAtOrAfter(
-          ZonedDateTime earliestReviewUpdatedTime) throws NullPointerException {
+          OffsetDateTime earliestReviewUpdatedTime) throws NullPointerException {
         reviewUpdatedTimeComparisons.add(
             new Comparison<>(EqualityOperator.GREATER_THAN_OR_EQUAL_TO, earliestReviewUpdatedTime)
         );

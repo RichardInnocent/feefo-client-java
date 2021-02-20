@@ -1,6 +1,6 @@
 package org.richardinnocent.feefo.api.auth.request;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ApiAuthenticationResponse {
 
   private String apiToken;
-  private ZonedDateTime expiresTime;
+  private OffsetDateTime expiresTime;
 
   /**
    * Gets the API token that can be sent with subsequent requests to authenticate.
@@ -32,7 +32,7 @@ public class ApiAuthenticationResponse {
    * Gets the expiration time of the token.
    * @return The expiration time of the token.
    */
-  public ZonedDateTime getExpiresTime() {
+  public OffsetDateTime getExpiresTime() {
     return expiresTime;
   }
 
@@ -40,7 +40,7 @@ public class ApiAuthenticationResponse {
    * Sets the expiration time of the token.
    * @param expiresTime The expiration time of the token.
    */
-  public void setExpiresTime(ZonedDateTime expiresTime) {
+  public void setExpiresTime(OffsetDateTime expiresTime) {
     this.expiresTime = expiresTime;
   }
 

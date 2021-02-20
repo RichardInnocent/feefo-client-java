@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -23,8 +23,8 @@ public class FeefoTimeModule extends SimpleModule {
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
   private FeefoTimeModule() {
-    addSerializer(new ZonedDateTimeSerializer());
-    addDeserializer(ZonedDateTime.class, new ZonedDateTimeDeserializer());
+    addSerializer(new OffsetDateTimeSerializer());
+    addDeserializer(OffsetDateTime.class, new OffsetDateTimeDeserializer());
   }
 
   /**
@@ -35,26 +35,26 @@ public class FeefoTimeModule extends SimpleModule {
     return INSTANCE;
   }
 
-  private static class ZonedDateTimeSerializer extends StdSerializer<ZonedDateTime> {
+  private static class OffsetDateTimeSerializer extends StdSerializer<OffsetDateTime> {
 
-    private ZonedDateTimeSerializer() {
-      super(ZonedDateTime.class);
+    private OffsetDateTimeSerializer() {
+      super(OffsetDateTime.class);
     }
 
     @Override
-    public void serialize(ZonedDateTime zonedDateTime, JsonGenerator jsonGenerator,
+    public void serialize(OffsetDateTime offsetDateTime, JsonGenerator jsonGenerator,
                           SerializerProvider serializerProvider) throws IOException {
-      jsonGenerator.writeString(zonedDateTime.format(DATE_TIME_FORMATTER));
+      jsonGenerator.writeString(offsetDateTime.format(DATE_TIME_FORMATTER));
     }
   }
 
-  private static class ZonedDateTimeDeserializer extends StdDeserializer<ZonedDateTime> {
-    private ZonedDateTimeDeserializer() {
-      super(ZonedDateTime.class);
+  private static class OffsetDateTimeDeserializer extends StdDeserializer<OffsetDateTime> {
+    private OffsetDateTimeDeserializer() {
+      super(OffsetDateTime.class);
     }
 
     @Override
-    public ZonedDateTime deserialize(JsonParser jsonParser,
+    public OffsetDateTime deserialize(JsonParser jsonParser,
                                      DeserializationContext deserializationContext)
         throws IOException {
       String value = jsonParser.getValueAsString();
@@ -65,12 +65,12 @@ public class FeefoTimeModule extends SimpleModule {
       return charSequence.chars().allMatch(Character::isDigit);
     }
 
-    private ZonedDateTime getFromEpochTime(long millis) {
-      return ZonedDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"));
+    private OffsetDateTime getFromEpochTime(long millis) {
+      return OffsetDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"));
     }
 
-    private ZonedDateTime getFromTimestamp(String timestamp) {
-      return ZonedDateTime.parse(timestamp);
+    private OffsetDateTime getFromTimestamp(String timestamp) {
+      return OffsetDateTime.parse(timestamp);
     }
   }
 }

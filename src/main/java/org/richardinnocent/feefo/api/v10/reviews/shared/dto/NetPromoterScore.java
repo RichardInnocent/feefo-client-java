@@ -1,23 +1,23 @@
 package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class NetPromoterScore {
 
   @JsonProperty("created_at")
-  private ZonedDateTime creationTime;
+  private OffsetDateTime creationTime;
 
   private Integer rating;
 
   private String reason;
 
-  public ZonedDateTime getCreationTime() {
+  public OffsetDateTime getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime(ZonedDateTime creationTime) {
+  public void setCreationTime(OffsetDateTime creationTime) {
     this.creationTime = creationTime;
   }
 

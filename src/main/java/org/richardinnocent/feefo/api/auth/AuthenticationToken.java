@@ -1,6 +1,6 @@
 package org.richardinnocent.feefo.api.auth;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -10,9 +10,9 @@ import java.util.Objects;
 public final class AuthenticationToken {
 
   private final String token;
-  private final ZonedDateTime expirationTime;
+  private final OffsetDateTime expirationTime;
 
-  private AuthenticationToken(String token, ZonedDateTime expirationTime)
+  private AuthenticationToken(String token, OffsetDateTime expirationTime)
       throws NullPointerException {
     this.token = Objects.requireNonNull(token, "Token must be set");
     this.expirationTime = Objects.requireNonNull(expirationTime, "Expiration time must be set");
@@ -30,7 +30,7 @@ public final class AuthenticationToken {
    * Gets the time at which the authentication token expires.
    * @return The time at which the authentication token expires.
    */
-  public ZonedDateTime getExpirationTime() {
+  public OffsetDateTime getExpirationTime() {
     return expirationTime;
   }
 
@@ -40,7 +40,7 @@ public final class AuthenticationToken {
    * @return {@code true} if the token has expired.
    */
   public boolean hasExpired() {
-    return expirationTime.compareTo(ZonedDateTime.now()) < 0;
+    return expirationTime.compareTo(OffsetDateTime.now()) < 0;
   }
 
   /**
@@ -50,7 +50,7 @@ public final class AuthenticationToken {
    * @return A new authentication token.
    * @throws NullPointerException Thrown if {@code token == null} or {@code expirationTime == null}.
    */
-  public static AuthenticationToken of(String token, ZonedDateTime expirationTime)
+  public static AuthenticationToken of(String token, OffsetDateTime expirationTime)
       throws NullPointerException {
     return new AuthenticationToken(token, expirationTime);
   }
