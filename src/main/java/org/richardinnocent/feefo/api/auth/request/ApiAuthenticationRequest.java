@@ -1,11 +1,13 @@
 package org.richardinnocent.feefo.api.auth.request;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.auth.ApiCredentials;
 import org.richardinnocent.feefo.api.requests.FeefoApiPostRequest;
+import org.richardinnocent.feefo.api.requests.QueryParameter;
 
 /**
  * Request that is used to authenticate the user and receive a valid authentication header that can
@@ -58,8 +60,8 @@ public class ApiAuthenticationRequest extends
   }
 
   @Override
-  protected Map<String, String> getRequestParameters() {
-    return Collections.emptyMap();
+  protected Collection<QueryParameter> getQueryParameters() {
+    return Collections.emptyList();
   }
 
   @Override

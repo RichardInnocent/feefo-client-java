@@ -2,14 +2,11 @@ package org.richardinnocent.feefo.api.requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Map;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.richardinnocent.feefo.api.FeefoApiRequestFailedException;
+import org.richardinnocent.feefo.api.CouldNotCreateRequestException;
 
 /**
  * Abstract implementation of a request to be sent to the Feefo API.
@@ -42,28 +39,25 @@ public abstract class AbstractFeefoApiRequest<R> implements FeefoApiRequest<R> {
     return pathBuilder.toString();
   }
 
-  private Optional<String> getQueryString() {
-    Map<String, String> requestParameters = getRequestParameters();
-    if (requestParameters == null || getRequestParameters().isEmpty()) {
+  private Optional<String> getQueryString() throws CouldNotCreateRequestException {
+    Collection<QueryParameter> queryParameters = getQueryParameters();
+    if (queryParameters == null || getQueryParameters().isEmpty()) {
       return Optional.empty();
     }
-    String parameterString =
-        requestParameters.entrySet()
-                         .stream()
-                         .map(this::toRequestParameter).collect(Collectors.joining("&"));
-    return Optional.of('?' + parameterString);
+
+    String queryString =
+        queryParameters.stream().map(this::toRequestParameter).collect(Collectors.joining("&"));
+
+    return Optional.of('?' + queryString);
   }
 
-  private String toRequestParameter(Map.Entry<String, String> parameter) {
+  private String toRequestParameter(QueryParameter queryParameter)
+      throws CouldNotCreateRequestException {
     try {
-      String key = URLEncoder.encode(parameter.getKey(), StandardCharsets.UTF_8.toString());
-      String value = URLEncoder.encode(parameter.getValue(), StandardCharsets.UTF_8.toString());
-      return key + '=' + value;
+      return queryParameter.toQueryStringForm();
     } catch (UnsupportedEncodingException e) {
-      throw new FeefoApiRequestFailedException(
-          "Could not convert parameter [" + parameter.getKey() + "="
-              + parameter.getValue() + "] to URL-encoded value",
-          e
+      throw new CouldNotCreateRequestException(
+          "Could not convert parameter " + queryParameter + " to URL-encoded value", e
       );
     }
   }
@@ -78,7 +72,7 @@ public abstract class AbstractFeefoApiRequest<R> implements FeefoApiRequest<R> {
   /**
    * Gets the request parameters that should be added as a query string.
    * @return The request parameters that should be added as a query string. If this is not
-   * applicable, {@link Collections#emptyMap()} or {@code null} can be returned.
+   * applicable, an empty collection or {@code null} can be returned.
    */
-  protected abstract Map<String, String> getRequestParameters();
+  protected abstract Collection<QueryParameter> getQueryParameters();
 }

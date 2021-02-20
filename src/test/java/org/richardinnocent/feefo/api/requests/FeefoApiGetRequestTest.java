@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.net.HttpURLConnection;
+import java.util.Collection;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ class FeefoApiGetRequestTest {
     }
 
     @Override
-    protected Map<String, String> getRequestParameters() {
+    protected Collection<QueryParameter> getQueryParameters() {
       return null;
     }
 

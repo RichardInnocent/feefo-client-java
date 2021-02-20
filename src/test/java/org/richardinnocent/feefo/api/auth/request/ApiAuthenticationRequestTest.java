@@ -35,7 +35,7 @@ public class ApiAuthenticationRequestTest {
   @Test
   public void getRequestParameters_Always_Empty() {
     assertTrue(
-        new ApiAuthenticationRequest(mock(ApiCredentials.class)).getRequestParameters().isEmpty()
+        new ApiAuthenticationRequest(mock(ApiCredentials.class)).getQueryParameters().isEmpty()
     );
   }
 

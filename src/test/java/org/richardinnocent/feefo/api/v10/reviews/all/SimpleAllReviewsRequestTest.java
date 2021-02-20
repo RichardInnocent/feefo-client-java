@@ -2,9 +2,11 @@ package org.richardinnocent.feefo.api.v10.reviews.all;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.richardinnocent.feefo.api.requests.EqualityOperator;
+import org.richardinnocent.feefo.api.requests.QueryParameter;
 
 class SimpleAllReviewsRequestTest {
 
@@ -21,11 +23,12 @@ class SimpleAllReviewsRequestTest {
   @Test
   public void getRequestParameters_Always_ContainsMerchantIdentifier() {
     String merchantIdentifier = "test-merchant";
-    Map<String, String> requestParameters =
-        Collections.singletonMap("merchant_identifier", merchantIdentifier);
+    Collection<QueryParameter> expectedParameters = Collections.singletonList(
+        new QueryParameter("merchant_identifier", EqualityOperator.EQUALS, merchantIdentifier)
+    );
     assertEquals(
-        requestParameters,
-        new SimpleAllReviewsRequest(merchantIdentifier).getRequestParameters()
+        expectedParameters,
+        new SimpleAllReviewsRequest(merchantIdentifier).getQueryParameters()
     );
   }
 

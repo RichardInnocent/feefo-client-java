@@ -1,10 +1,13 @@
 package org.richardinnocent.feefo.api.v10.reviews.all;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
+import org.richardinnocent.feefo.api.requests.EqualityOperator;
 import org.richardinnocent.feefo.api.requests.FeefoApiGetRequest;
+import org.richardinnocent.feefo.api.requests.QueryParameter;
 
 public class SimpleAllReviewsRequest extends FeefoApiGetRequest<SimpleAllReviewsResponse> {
 
@@ -22,8 +25,8 @@ public class SimpleAllReviewsRequest extends FeefoApiGetRequest<SimpleAllReviews
   }
 
   @Override
-  protected Map<String, String> getRequestParameters() {
-    return Collections.singletonMap("merchant_identifier", merchantIdentifier);
+  protected Collection<QueryParameter> getQueryParameters() {
+    return Collections.singletonList(new QueryParameter("merchant_identifier", EqualityOperator.EQUALS, merchantIdentifier));
   }
 
   @Override

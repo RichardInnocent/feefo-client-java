@@ -56,11 +56,22 @@ public class FeefoTimeModule extends SimpleModule {
     public LocalDateTime deserialize(JsonParser jsonParser,
                                      DeserializationContext deserializationContext)
         throws IOException {
-      long epochTime = jsonParser.getValueAsLong();
-      long seconds = epochTime / 1000L;
-      int nanos = (int) (epochTime % 1000L * 1000L);
+      String value = jsonParser.getValueAsString();
+      return isEpochTime(value) ? getFromEpochTime(Long.parseLong(value)) : getFromTimestamp(value);
+    }
+
+    private boolean isEpochTime(CharSequence charSequence) {
+      return charSequence.chars().allMatch(Character::isDigit);
+    }
+
+    private LocalDateTime getFromEpochTime(long millis) {
+      long seconds = millis / 1000L;
+      int nanos = (int) (millis % 1000L * 1000L);
       return LocalDateTime.ofEpochSecond(seconds, nanos, ZoneOffset.UTC);
     }
-  }
 
+    private LocalDateTime getFromTimestamp(String timestamp) {
+      return LocalDateTime.parse(timestamp);
+    }
+  }
 }

@@ -2,13 +2,15 @@ package org.richardinnocent.feefo.api.requests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class AbstractFeefoApiRequestTest {
@@ -44,32 +46,56 @@ class AbstractFeefoApiRequestTest {
     String basePath = "basePath";
     assertEquals(
         basePath,
-        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, Collections.emptyMap())
+        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, Collections.emptyList())
             .getPath()
     );
   }
 
   @Test
-  public void getPath_SingleParameter_ReturnsBasePathPlusUrlEncodedParameter() {
+  public void getPath_SingleParameter_ReturnsBasePathPlusUrlEncodedParameter()
+      throws UnsupportedEncodingException {
     String basePath = "basePath";
-    Map<String, String> requestParameters = Collections.singletonMap("test key", "test value");
+
+    QueryParameter parameter = mock(QueryParameter.class);
+    when(parameter.toQueryStringForm()).thenReturn("key=value");
+
+    Collection<QueryParameter> parameters = Collections.singleton(parameter);
+
     assertEquals(
-        basePath + "?test+key=test+value",
-        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, requestParameters)
+        basePath + "?" + parameter.toQueryStringForm(),
+        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, parameters)
             .getPath()
     );
   }
 
   @Test
-  public void getPath_MultipleParameters_ReturnsBasePathPlusUrlEncodedParameters() {
+  public void getPath_MultipleParameters_ReturnsBasePathPlusUrlEncodedParameters()
+      throws UnsupportedEncodingException {
     String basePath = "basePath";
-    Map<String, String> requestParameters = new HashMap<>(3);
-    requestParameters.put("key1", "value1");
-    requestParameters.put("key2", "value 2");
-    requestParameters.put("key3", "value  3");
+
+    QueryParameter parameter1 = mock(QueryParameter.class);
+    QueryParameter parameter2 = mock(QueryParameter.class);
+    QueryParameter parameter3 = mock(QueryParameter.class);
+
+    when(parameter1.toQueryStringForm()).thenReturn("key1=value1");
+    when(parameter2.toQueryStringForm()).thenReturn("key2=value2");
+    when(parameter3.toQueryStringForm()).thenReturn("key3=value3");
+
+    Collection<QueryParameter> queryParameters = Arrays.asList(
+        parameter1, parameter2, parameter3
+    );
+
+    String expectedUrl = String.format(
+        "%s?%s&%s&%s",
+        basePath,
+        parameter1.toQueryStringForm(),
+        parameter2.toQueryStringForm(),
+        parameter3.toQueryStringForm()
+    );
+
     assertEquals(
-        basePath + "?key1=value1&key2=value+2&key3=value++3",
-        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, requestParameters)
+        expectedUrl,
+        new TestFeefoApiRequest<>(new TypeReference<Object>() {}, basePath, queryParameters)
             .getPath()
     );
   }
@@ -77,15 +103,15 @@ class AbstractFeefoApiRequestTest {
   private static class TestFeefoApiRequest<T> extends AbstractFeefoApiRequest<T> {
 
     private final String basePath;
-    private final Map<String, String> requestParameters;
+    private final Collection<QueryParameter> requestParameters;
 
     protected TestFeefoApiRequest(
         TypeReference<T> responseTypeReference,
         String basePath,
-        Map<String, String> requestParameters) {
+        Collection<QueryParameter> queryParameters) {
       super(responseTypeReference);
       this.basePath = basePath;
-      this.requestParameters = requestParameters;
+      this.requestParameters = queryParameters;
     }
 
     @Override
@@ -94,7 +120,7 @@ class AbstractFeefoApiRequestTest {
     }
 
     @Override
-    protected Map<String, String> getRequestParameters() {
+    protected Collection<QueryParameter> getQueryParameters() {
       return requestParameters;
     }
 

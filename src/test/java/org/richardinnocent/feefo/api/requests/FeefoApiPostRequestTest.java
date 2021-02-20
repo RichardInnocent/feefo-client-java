@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -58,7 +59,7 @@ class FeefoApiPostRequestTest {
     }
 
     @Override
-    protected Map<String, String> getRequestParameters() {
+    protected Collection<QueryParameter> getQueryParameters() {
       return null;
     }
 
