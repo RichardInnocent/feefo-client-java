@@ -3,6 +3,9 @@ package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
+/**
+ * Contains details on media attached to a review.
+ */
 public class Media {
 
   private String id;
@@ -19,62 +22,101 @@ public class Media {
   @JsonProperty("helpful_votes")
   private int helpfulVotes;
 
-  private String questionId;
-
+  /**
+   * Gets the ID of the media item.
+   * @return The ID of the media item.
+   */
   public String getId() {
     return id;
   }
 
+  /**
+   * Sets the ID of the media item.
+   * @param id The ID of the media item.
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * Gets the type of media attached.
+   * @return The type of media attached.
+   */
   public MediaType getType() {
     return type;
   }
 
+  /**
+   * Sets the type of media attached.
+   * @param type The type of media attached.
+   */
   public void setType(MediaType type) {
     this.type = type;
   }
 
+  /**
+   * Gets the URL to the media item.
+   * @return The URL to the media item.
+   */
   public String getUrl() {
     return url;
   }
 
+  /**
+   * Sets the URL to the media item.
+   * @param url The URL to the media item.
+   */
   public void setUrl(String url) {
     this.url = url;
   }
 
+  /**
+   * Gets the URL to the static video thumbnail. This is only present if
+   * {@code getType == MediaType.VIDEO}.
+   * @return The URL to the static video thumbnail.
+   */
   public String getThumbnailUrl() {
     return thumbnailUrl;
   }
 
+  /**
+   * Sets the URL to the static video thumbnail.
+   * @param thumbnailUrl The URL to the static video thumbnail.
+   */
   public void setThumbnailUrl(String thumbnailUrl) {
     this.thumbnailUrl = thumbnailUrl;
   }
 
+  /**
+   * Gets the consumer-provided caption for the media item.
+   * @return The consumer-provided caption for the media item.
+   */
   public String getCaption() {
     return caption;
   }
 
+  /**
+   * Sets the consumer-provided caption for the media item.
+   * @param caption The consumer-provided caption for the media item.
+   */
   public void setCaption(String caption) {
     this.caption = caption;
   }
 
+  /**
+   * Gets the number of helpful votes that the media item has received.
+   * @return The number of helpful votes that the media item has received.
+   */
   public int getHelpfulVotes() {
     return helpfulVotes;
   }
 
+  /**
+   * Sets the number of helpful votes that the media item has received.
+   * @param helpfulVotes The number of helpful votes that the media item has received.
+   */
   public void setHelpfulVotes(int helpfulVotes) {
     this.helpfulVotes = helpfulVotes;
-  }
-
-  public String getQuestionId() {
-    return questionId;
-  }
-
-  public void setQuestionId(String questionId) {
-    this.questionId = questionId;
   }
 
   @Override
@@ -91,12 +133,11 @@ public class Media {
         && Objects.equals(type, media.type)
         && Objects.equals(url, media.url)
         && Objects.equals(thumbnailUrl, media.thumbnailUrl)
-        && Objects.equals(caption, media.caption)
-        && Objects.equals(questionId, media.questionId);
+        && Objects.equals(caption, media.caption);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, url, thumbnailUrl, caption, helpfulVotes, questionId);
+    return Objects.hash(id, type, url, thumbnailUrl, caption, helpfulVotes);
   }
 }

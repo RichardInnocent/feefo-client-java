@@ -8,9 +8,9 @@ class UnansweredFeedbackInclusionTest {
 
   @Test
   public void getQueryKey_Always_AsExpected() {
-    assertEquals("include", UnansweredFeedbackInclusion.INCLUDE.getQueryKey());
-    assertEquals("exclude", UnansweredFeedbackInclusion.EXCLUDE.getQueryKey());
-    assertEquals("exclude_negative", UnansweredFeedbackInclusion.EXCLUDE_NEGATIVE.getQueryKey());
+    assertEquals("include", UnansweredFeedbackInclusion.INCLUDE.getQueryValue());
+    assertEquals("exclude", UnansweredFeedbackInclusion.EXCLUDE.getQueryValue());
+    assertEquals("exclude_negative", UnansweredFeedbackInclusion.EXCLUDE_NEGATIVE.getQueryValue());
   }
 
 }

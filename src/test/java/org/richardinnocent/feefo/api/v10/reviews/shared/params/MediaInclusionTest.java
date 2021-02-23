@@ -8,11 +8,11 @@ class MediaInclusionTest {
 
   @Test
   public void getQueryKey_Always_AsExpected() {
-    assertEquals("include", MediaInclusion.INCLUDE.getQueryKey());
-    assertEquals("exclude", MediaInclusion.EXCLUDE.getQueryKey());
-    assertEquals("only", MediaInclusion.MUST_HAVE_MEDIA.getQueryKey());
-    assertEquals("video", MediaInclusion.MUST_HAVE_VIDEO.getQueryKey());
-    assertEquals("photo", MediaInclusion.MUST_HAVE_PHOTO.getQueryKey());
+    assertEquals("include", MediaInclusion.INCLUDE.getQueryValue());
+    assertEquals("exclude", MediaInclusion.EXCLUDE.getQueryValue());
+    assertEquals("only", MediaInclusion.MUST_HAVE_MEDIA.getQueryValue());
+    assertEquals("video", MediaInclusion.MUST_HAVE_VIDEO.getQueryValue());
+    assertEquals("photo", MediaInclusion.MUST_HAVE_PHOTO.getQueryValue());
   }
 
 }

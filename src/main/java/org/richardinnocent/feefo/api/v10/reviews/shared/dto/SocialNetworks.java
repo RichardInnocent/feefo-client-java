@@ -3,39 +3,66 @@ package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
+/**
+ * Contains social network sharing information.
+ */
 public class SocialNetworks {
 
   @JsonProperty("facebook")
-  private String facebookPage;
+  private String facebookShareLink;
 
   @JsonProperty("twitter")
-  private String twitterPage;
+  private String twitterShareLink;
 
   @JsonProperty("google_plus")
-  private String googlePlusPage;
+  private String googlePlusShareLink;
 
-  public String getFacebookPage() {
-    return facebookPage;
+  /**
+   * Gets the link to share the resource on Facebook.
+   * @return The link to share the resource on Facebook.
+   */
+  public String getFacebookShareLink() {
+    return facebookShareLink;
   }
 
-  public void setFacebookPage(String facebookPage) {
-    this.facebookPage = facebookPage;
+  /**
+   * Sets the link to share the resource on Facebook.
+   * @param facebookShareLink The link to share the resource on Facebook.
+   */
+  public void setFacebookShareLink(String facebookShareLink) {
+    this.facebookShareLink = facebookShareLink;
   }
 
-  public String getGooglePlusPage() {
-    return googlePlusPage;
+  /**
+   * Gets the link to share the resource on Google+.
+   * @return The link to share the resource on Google+.
+   */
+  public String getGooglePlusShareLink() {
+    return googlePlusShareLink;
   }
 
-  public void setGooglePlusPage(String googlePlusPage) {
-    this.googlePlusPage = googlePlusPage;
+  /**
+   * Sets the link to share the resource on Google+.
+   * @param googlePlusShareLink The link to share the resource on Google+.
+   */
+  public void setGooglePlusShareLink(String googlePlusShareLink) {
+    this.googlePlusShareLink = googlePlusShareLink;
   }
 
-  public String getTwitterPage() {
-    return twitterPage;
+  /**
+   * Gets the link to share the resource on Twitter.
+   * @return The link to share the resource on Twitter.
+   */
+  public String getTwitterShareLink() {
+    return twitterShareLink;
   }
 
-  public void setTwitterPage(String twitterPage) {
-    this.twitterPage = twitterPage;
+  /**
+   * Sets the link to share the resource on Twitter.
+   * @param twitterShareLink The link to share the resource on Twitter.
+   */
+  public void setTwitterShareLink(String twitterShareLink) {
+    this.twitterShareLink = twitterShareLink;
   }
 
   @Override
@@ -47,13 +74,13 @@ public class SocialNetworks {
       return false;
     }
     SocialNetworks that = (SocialNetworks) o;
-    return Objects.equals(facebookPage, that.facebookPage)
-        && Objects.equals(twitterPage, that.twitterPage)
-        && Objects.equals(googlePlusPage, that.googlePlusPage);
+    return Objects.equals(facebookShareLink, that.facebookShareLink)
+        && Objects.equals(twitterShareLink, that.twitterShareLink)
+        && Objects.equals(googlePlusShareLink, that.googlePlusShareLink);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(facebookPage, twitterPage, googlePlusPage);
+    return Objects.hash(facebookShareLink, twitterShareLink, googlePlusShareLink);
   }
 }

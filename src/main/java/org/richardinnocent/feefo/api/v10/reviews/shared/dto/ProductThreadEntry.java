@@ -1,21 +1,27 @@
 package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Contains an audit history for some product feedback, including changes to the review and the
+ * conversation between the consumer and merchant.
+ */
 public class ProductThreadEntry extends ThreadEntry {
 
-  private final List<ProductThreadAttribute> attributes = new ArrayList<>();
+  @JsonProperty("attributes")
+  private final List<ReRatedProductAttribute> reRatedProductAttributes = new ArrayList<>();
 
-  public List<ProductThreadAttribute> getAttributes() {
-    return new ArrayList<>(attributes);
+  public List<ReRatedProductAttribute> getReRatedProductAttributes() {
+    return new ArrayList<>(reRatedProductAttributes);
   }
 
-  public void setAttributes(List<ProductThreadAttribute> attributes) {
-    this.attributes.clear();
-    if (attributes != null) {
-      this.attributes.addAll(attributes);
+  public void setReRatedProductAttributes(List<ReRatedProductAttribute> reRatedProductAttributes) {
+    this.reRatedProductAttributes.clear();
+    if (reRatedProductAttributes != null) {
+      this.reRatedProductAttributes.addAll(reRatedProductAttributes);
     }
   }
 
@@ -31,11 +37,11 @@ public class ProductThreadEntry extends ThreadEntry {
       return false;
     }
     ProductThreadEntry that = (ProductThreadEntry) o;
-    return Objects.equals(attributes, that.attributes);
+    return Objects.equals(reRatedProductAttributes, that.reRatedProductAttributes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), attributes);
+    return Objects.hash(super.hashCode(), reRatedProductAttributes);
   }
 }

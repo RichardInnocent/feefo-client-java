@@ -29,7 +29,7 @@ class ComparisonTest {
     EqualityOperator equalityOperator = EqualityOperator.LESS_THAN;
     int reference = 7;
     Comparison<Integer> comparison = new Comparison<>(equalityOperator, reference);
-    assertEquals(equalityOperator, comparison.getComparator());
+    assertEquals(equalityOperator, comparison.getEqualityOperator());
     assertEquals(reference, comparison.getReference());
   }
 

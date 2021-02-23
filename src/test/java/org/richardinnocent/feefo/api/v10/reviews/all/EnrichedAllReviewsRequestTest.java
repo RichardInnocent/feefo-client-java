@@ -728,7 +728,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("since_period", timeFrame.getQueryKey()))
+               .contains(new QueryParameter("since_period", timeFrame.getQueryValue()))
     );
   }
 
@@ -755,7 +755,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("since_updated_period", timeFrame.getQueryKey()))
+               .contains(new QueryParameter("since_updated_period", timeFrame.getQueryValue()))
     );
   }
 
@@ -1140,7 +1140,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("children", inclusion.getQueryKey()))
+               .contains(new QueryParameter("children", inclusion.getQueryValue()))
     );
   }
 
@@ -1155,7 +1155,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("media", inclusion.getQueryKey()))
+               .contains(new QueryParameter("media", inclusion.getQueryValue()))
     );
   }
 
@@ -1170,7 +1170,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("empty_product_comments", inclusion.getQueryKey()))
+               .contains(new QueryParameter("empty_product_comments", inclusion.getQueryValue()))
     );
   }
 
@@ -1185,7 +1185,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("unanswered_feedback", inclusion.getQueryKey()))
+               .contains(new QueryParameter("unanswered_feedback", inclusion.getQueryValue()))
     );
   }
 
@@ -1200,7 +1200,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("full_thread", inclusion.getQueryKey()))
+               .contains(new QueryParameter("full_thread", inclusion.getQueryValue()))
     );
   }
 
@@ -1215,7 +1215,7 @@ class EnrichedAllReviewsRequestTest {
     assertEquals(2, request.getQueryParameters().size());
     assertTrue(
         request.getQueryParameters()
-               .contains(new QueryParameter("enhanced_insight", inclusion.getQueryKey()))
+               .contains(new QueryParameter("enhanced_insight", inclusion.getQueryValue()))
     );
   }
 

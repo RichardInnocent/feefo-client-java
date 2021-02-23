@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.richardinnocent.feefo.api.v10.reviews.shared.dto.Merchant;
-import org.richardinnocent.feefo.api.v10.reviews.shared.dto.EnrichedProductFeedback;
-import org.richardinnocent.feefo.api.v10.reviews.shared.dto.EnrichedServiceFeedback;
+import org.richardinnocent.feefo.api.v10.reviews.shared.dto.SimpleProductFeedback;
+import org.richardinnocent.feefo.api.v10.reviews.shared.dto.SimpleServiceFeedback;
 import org.richardinnocent.feefo.api.v10.reviews.shared.dto.SocialNetworks;
 
+/**
+ * Contains details of a review.
+ */
 public class SimpleReview {
 
   private Merchant merchant;
@@ -28,31 +31,55 @@ public class SimpleReview {
   private SimpleCustomer customer;
 
   @JsonProperty("service")
-  private EnrichedServiceFeedback serviceFeedback;
+  private SimpleServiceFeedback serviceFeedback;
 
   @JsonProperty("products")
-  private final List<EnrichedProductFeedback> productFeedback = new ArrayList<>();
+  private final List<SimpleProductFeedback> productFeedback = new ArrayList<>();
 
+  /**
+   * Gets the merchant of the sale.
+   * @return The merchant of the sale.
+   */
   public Merchant getMerchant() {
     return merchant;
   }
 
+  /**
+   * Sets the merchant of the sale.
+   * @param merchant The merchant of the sale.
+   */
   public void setMerchant(Merchant merchant) {
     this.merchant = merchant;
   }
 
+  /**
+   * Gets the time that the review was last updated.
+   * @return The time that the review was last updated.
+   */
   public OffsetDateTime getLastUpdatedDate() {
     return lastUpdatedDate;
   }
 
+  /**
+   * Sets the time that the review was last updated.
+   * @param lastUpdatedDate The time that the review was last updated.
+   */
   public void setLastUpdatedDate(OffsetDateTime lastUpdatedDate) {
     this.lastUpdatedDate = lastUpdatedDate;
   }
 
+  /**
+   * Gets the names of the products that were purchased in the sale.
+   * @return The names of the products that were purchased in the sale.
+   */
   public List<String> getProductsPurchased() {
     return new ArrayList<>(productsPurchased);
   }
 
+  /**
+   * Sets the names of the products that were purchased in the sale.
+   * @param productsPurchased The names of the products that were purchased in the sale.
+   */
   public void setProductsPurchased(List<String> productsPurchased) {
     this.productsPurchased.clear();
     if (productsPurchased != null) {
@@ -60,35 +87,67 @@ public class SimpleReview {
     }
   }
 
+  /**
+   * Gets the URL of the review on Feefo's website.
+   * @return The URL of the review on Feefo's website.
+   */
   public String getUrl() {
     return url;
   }
 
+  /**
+   * Sets the URL of the review on Feefo's website.
+   * @param url The URL of the review on Feefo's website.
+   */
   public void setUrl(String url) {
     this.url = url;
   }
 
+  /**
+   * Gets the social network share links for the review.
+   * @return The social network share links for the review.
+   */
   public SocialNetworks getSocialNetworks() {
     return socialNetworks;
   }
 
+  /**
+   * Sets the social network share links for the review.
+   * @param socialNetworks The social network share links for the review.
+   */
   public void setSocialNetworks(SocialNetworks socialNetworks) {
     this.socialNetworks = socialNetworks;
   }
 
-  public EnrichedServiceFeedback getServiceFeedback() {
+  /**
+   * Gets the feedback for the service.
+   * @return The feedback for the service.
+   */
+  public SimpleServiceFeedback getServiceFeedback() {
     return serviceFeedback;
   }
 
-  public void setServiceFeedback(EnrichedServiceFeedback serviceFeedback) {
+  /**
+   * Sets the feedback for the service.
+   * @param serviceFeedback The feedback for the service.
+   */
+  public void setServiceFeedback(SimpleServiceFeedback serviceFeedback) {
     this.serviceFeedback = serviceFeedback;
   }
 
-  public List<EnrichedProductFeedback> getProductFeedback() {
+  /**
+   * Gets the feedback for the products purchased in this sale.
+   * @return The feedback for the products purchased in this sale.
+   */
+  public List<SimpleProductFeedback> getProductFeedback() {
     return new ArrayList<>(productFeedback);
   }
 
-  public void setProductFeedback(List<EnrichedProductFeedback> productFeedback) {
+  /**
+   * Sets the product feedback for the products purchased in this sale.
+   * @param productFeedback The product feedback for the products purchased in this sale.
+   */
+  public void setProductFeedback(List<SimpleProductFeedback> productFeedback) {
     this.productFeedback.clear();
     if (productFeedback != null) {
       this.productFeedback.addAll(productFeedback);

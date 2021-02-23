@@ -5,29 +5,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Contains product feedback information. This can contain personally identifiable or business-sensitive
+ * information, so is only returned from authorised requests.
+ */
 public class EnrichedProductFeedback extends EnrichedFeedback {
 
   private EnrichedProduct product;
 
   @JsonProperty("thread")
-  private final List<ProductThreadEntry> commentThread = new ArrayList<>();
+  private final List<ProductThreadEntry> auditThread = new ArrayList<>();
 
+  /**
+   * Gets details of the product that was reviewed.
+   * @return Details of the product that was reviewed.
+   */
   public EnrichedProduct getProduct() {
     return product;
   }
 
+  /**
+   * Sets the details of the product that was reviewed.
+   * @param product The details of the product that was reviewed.
+   */
   public void setProduct(EnrichedProduct product) {
     this.product = product;
   }
 
-  public List<ProductThreadEntry> getCommentThread() {
-    return new ArrayList<>(commentThread);
+  /**
+   * Gets an audit history for the feedback, including changes to the review and the conversation
+   * between the consumer and merchant.
+   * @return The audit history for the feedback.
+   */
+  public List<ProductThreadEntry> getAuditThread() {
+    return new ArrayList<>(auditThread);
   }
 
-  public void setCommentThread(List<ProductThreadEntry> commentThread) {
-    this.commentThread.clear();
-    if (commentThread != null) {
-      this.commentThread.addAll(commentThread);
+  /**
+   * Sets the audit history for the feedback, including changes to the review and the conversation
+   * between the consumer and merchant.
+   * @param auditThread The audit history for the feedback.
+   */
+  public void setAuditThread(List<ProductThreadEntry> auditThread) {
+    this.auditThread.clear();
+    if (auditThread != null) {
+      this.auditThread.addAll(auditThread);
     }
   }
 
@@ -44,12 +66,12 @@ public class EnrichedProductFeedback extends EnrichedFeedback {
     }
     EnrichedProductFeedback that = (EnrichedProductFeedback) o;
     return Objects.equals(product, that.product)
-        && Objects.equals(commentThread, that.commentThread);
+        && Objects.equals(auditThread, that.auditThread);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), product, commentThread);
+    return Objects.hash(super.hashCode(), product, auditThread);
   }
 
 }

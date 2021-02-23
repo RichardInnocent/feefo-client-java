@@ -61,7 +61,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
         .map(
             comparison ->
                 new QueryParameter(
-                    "date_time", comparison.getComparator(), comparison.getReference().toString()
+                    "date_time", comparison.getEqualityOperator(), comparison.getReference().toString()
                 )
         )
         .forEach(queryParameters::add);
@@ -72,7 +72,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
             comparison ->
                 new QueryParameter(
                     "updated_date_time",
-                    comparison.getComparator(),
+                    comparison.getEqualityOperator(),
                     comparison.getReference().toString()
                 )
         )
@@ -128,20 +128,20 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
 
     if (builder.feedbackFromSubMerchantsInclusion != null) {
       queryParameters.add(
-          new QueryParameter("children", builder.feedbackFromSubMerchantsInclusion.getQueryKey())
+          new QueryParameter("children", builder.feedbackFromSubMerchantsInclusion.getQueryValue())
       );
     }
 
     if (builder.mediaInclusion != null) {
       queryParameters.add(
-          new QueryParameter("media", builder.mediaInclusion.getQueryKey())
+          new QueryParameter("media", builder.mediaInclusion.getQueryValue())
       );
     }
 
     if (builder.emptyProductCommentInclusion != null) {
       queryParameters.add(
           new QueryParameter(
-              "empty_product_comments", builder.emptyProductCommentInclusion.getQueryKey()
+              "empty_product_comments", builder.emptyProductCommentInclusion.getQueryValue()
           )
       );
     }
@@ -149,20 +149,20 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
     if (builder.unansweredFeedbackInclusion != null) {
       queryParameters.add(
           new QueryParameter(
-              "unanswered_feedback", builder.unansweredFeedbackInclusion.getQueryKey()
+              "unanswered_feedback", builder.unansweredFeedbackInclusion.getQueryValue()
           )
       );
     }
 
     if (builder.fullThreadInclusion != null) {
       queryParameters.add(
-          new QueryParameter("full_thread", builder.fullThreadInclusion.getQueryKey())
+          new QueryParameter("full_thread", builder.fullThreadInclusion.getQueryValue())
       );
     }
 
     if (builder.enhancedInsightInclusion != null) {
       queryParameters.add(
-          new QueryParameter("enhanced_insight", builder.enhancedInsightInclusion.getQueryKey())
+          new QueryParameter("enhanced_insight", builder.enhancedInsightInclusion.getQueryValue())
       );
     }
   }
@@ -377,14 +377,14 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       public FinalStageBuilder withReviewCreatedIn(TimeFrame reviewCreationTimeFrame)
           throws NullPointerException {
         reviewCreatedSinceComparison =
-            new Comparison<>(EqualityOperator.EQUALS, reviewCreationTimeFrame.getQueryKey());
+            new Comparison<>(EqualityOperator.EQUALS, reviewCreationTimeFrame.getQueryValue());
         return this;
       }
 
       public FinalStageBuilder withReviewUpdatedIn(TimeFrame reviewUpdatedTimeFrame)
           throws NullPointerException {
         reviewUpdatedSinceComparison =
-            new Comparison<>(EqualityOperator.EQUALS, reviewUpdatedTimeFrame.getQueryKey());
+            new Comparison<>(EqualityOperator.EQUALS, reviewUpdatedTimeFrame.getQueryValue());
         return this;
       }
 

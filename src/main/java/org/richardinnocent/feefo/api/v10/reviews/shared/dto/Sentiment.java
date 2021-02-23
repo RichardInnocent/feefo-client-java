@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Contains sentiment information on review content.
+ */
 public class Sentiment {
 
   private final List<Feature> features = new ArrayList<>();
@@ -15,6 +18,18 @@ public class Sentiment {
   @JsonProperty("negative_snippets")
   private final List<Feature> negativeSnippets = new ArrayList<>();
 
+  /**
+   * Gets all of the prominent features that were detected in the text.
+   * @return The prominent features that were detected in the text.
+   */
+  public List<Feature> getFeatures() {
+    return new ArrayList<>(features);
+  }
+
+  /**
+   * Sets the prominent features that were detected in the text.
+   * @param features The prominent features that were detected in the text.
+   */
   public void setFeatures(List<Feature> features) {
     this.features.clear();
     if (features != null) {
@@ -22,10 +37,20 @@ public class Sentiment {
     }
   }
 
-  public List<Feature> getFeatures() {
-    return new ArrayList<>(features);
+  /**
+   * Gets the short snippets of text from the review that were deemed to have a positive sentiment.
+   * @return The short snippets of text from the review that were deemed to have a positive
+   * sentiment.
+   */
+  public List<Feature> getPositiveSnippets() {
+    return new ArrayList<>(positiveSnippets);
   }
 
+  /**
+   * Sets the short snippets of text from the review that were deemed to have a positive sentiment.
+   * @param positiveSnippets The short snippets of text from the review that were deemed to have a
+   * positive sentiment.
+   */
   public void setPositiveSnippets(List<Feature> positiveSnippets) {
     this.positiveSnippets.clear();
     if (positiveSnippets != null) {
@@ -33,19 +58,25 @@ public class Sentiment {
     }
   }
 
-  public List<Feature> getPositiveSnippets() {
-    return new ArrayList<>(positiveSnippets);
+  /**
+   * Gets the short snippets of text from the review that were deemed to have a negative sentiment.
+   * @return The short snippets of text from the review that were deemed to have a negative
+   * sentiment.
+   */
+  public List<Feature> getNegativeSnippets() {
+    return new ArrayList<>(negativeSnippets);
   }
 
+  /**
+   * Sets the short snippets of text from the review that were deemed to have a negative sentiment.
+   * @param negativeSnippets The short snippets of text from the review that were deemed to have a
+   * negative sentiment.
+   */
   public void setNegativeSnippets(List<Feature> negativeSnippets) {
     this.negativeSnippets.clear();
     if (negativeSnippets != null) {
       this.negativeSnippets.addAll(negativeSnippets);
     }
-  }
-
-  public List<Feature> getNegativeSnippets() {
-    return new ArrayList<>(negativeSnippets);
   }
 
   @Override

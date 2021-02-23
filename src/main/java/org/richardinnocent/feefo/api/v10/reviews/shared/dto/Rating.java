@@ -11,6 +11,7 @@ public class Rating {
   @JsonProperty("max")
   private int maximumAssignableRating;
 
+  @JsonProperty("rating")
   private int rating;
 
   public int getMinimumAssignableRating() {

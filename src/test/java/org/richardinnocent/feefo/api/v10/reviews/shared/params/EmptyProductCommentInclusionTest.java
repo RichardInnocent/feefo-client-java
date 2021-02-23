@@ -8,9 +8,9 @@ class EmptyProductCommentInclusionTest {
 
   @Test
   public void getQueryKey_Always_AsExpected() {
-    assertEquals("include", EmptyProductCommentInclusion.INCLUDE.getQueryKey());
-    assertEquals("default", EmptyProductCommentInclusion.INJECT_DEFAULT_COMMENT.getQueryKey());
-    assertEquals("exclude", EmptyProductCommentInclusion.EXCLUDE.getQueryKey());
+    assertEquals("include", EmptyProductCommentInclusion.INCLUDE.getQueryValue());
+    assertEquals("default", EmptyProductCommentInclusion.INJECT_DEFAULT_COMMENT.getQueryValue());
+    assertEquals("exclude", EmptyProductCommentInclusion.EXCLUDE.getQueryValue());
   }
 
 }
