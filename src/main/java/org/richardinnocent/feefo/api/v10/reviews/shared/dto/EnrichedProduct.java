@@ -188,11 +188,12 @@ public class EnrichedProduct {
         && Objects.equals(url, product.url)
         && Objects.equals(tags, product.tags)
         && Objects.equals(reviewsUrl, product.reviewsUrl)
-        && Objects.equals(imageUrl, product.imageUrl);
+        && Objects.equals(imageUrl, product.imageUrl)
+        && Objects.equals(aux, product.aux);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(title, parentSku, sku, url, tags, reviewsUrl, imageUrl);
+    return Objects.hash(title, parentSku, sku, url, tags, reviewsUrl, imageUrl, aux);
   }
 }

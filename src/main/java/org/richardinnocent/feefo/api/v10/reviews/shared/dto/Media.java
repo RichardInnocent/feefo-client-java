@@ -184,13 +184,14 @@ public class Media {
         && Objects.equals(thumbnailUrl, media.thumbnailUrl)
         && Objects.equals(caption, media.caption)
         && Objects.equals(carouselUrl, media.carouselUrl)
-        && Objects.equals(socialNetworks, media.socialNetworks);
+        && Objects.equals(socialNetworks, media.socialNetworks)
+        && removed == media.removed;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        id, type, url, thumbnailUrl, caption, helpfulVotes, carouselUrl, socialNetworks
+        id, type, url, thumbnailUrl, caption, helpfulVotes, carouselUrl, socialNetworks, removed
     );
   }
 }
