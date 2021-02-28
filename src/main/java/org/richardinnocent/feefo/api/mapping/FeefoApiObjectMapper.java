@@ -1,5 +1,6 @@
 package org.richardinnocent.feefo.api.mapping;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.richardinnocent.feefo.api.mapping.modules.time.FeefoTimeModule;
@@ -14,7 +15,7 @@ public class FeefoApiObjectMapper extends ObjectMapper {
    */
   public FeefoApiObjectMapper() {
     registerModule(FeefoTimeModule.getInstance());
-//    configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
   }
 
