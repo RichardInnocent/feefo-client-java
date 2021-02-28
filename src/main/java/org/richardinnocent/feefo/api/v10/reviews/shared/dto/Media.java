@@ -2,6 +2,7 @@ package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import org.richardinnocent.feefo.api.util.Undocumented;
 
 /**
  * Contains details on media attached to a review.
@@ -21,6 +22,16 @@ public class Media {
 
   @JsonProperty("helpful_votes")
   private int helpfulVotes;
+
+  @Undocumented
+  private String carouselUrl;
+
+  @Undocumented
+  @JsonProperty("social")
+  private SocialNetworks socialNetworks;
+
+  @Undocumented
+  private boolean removed;
 
   /**
    * Gets the ID of the media item.
@@ -119,6 +130,44 @@ public class Media {
     this.helpfulVotes = helpfulVotes;
   }
 
+  @Undocumented
+  public String getCarouselUrl() {
+    return carouselUrl;
+  }
+
+  @Undocumented
+  public void setCarouselUrl(String carouselUrl) {
+    this.carouselUrl = carouselUrl;
+  }
+
+  /**
+   * Gets the social network share links for this media item.
+   * @return The social network share links for this media item.
+   */
+  @Undocumented
+  public SocialNetworks getSocialNetworks() {
+    return socialNetworks;
+  }
+
+  /**
+   * Sets the social network share links for this media item.
+   * @param socialNetworks The social network share links for this media item.
+   */
+  @Undocumented
+  public void setSocialNetworks(SocialNetworks socialNetworks) {
+    this.socialNetworks = socialNetworks;
+  }
+
+  @Undocumented
+  public boolean isRemoved() {
+    return removed;
+  }
+
+  @Undocumented
+  public void setRemoved(boolean removed) {
+    this.removed = removed;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -133,11 +182,15 @@ public class Media {
         && Objects.equals(type, media.type)
         && Objects.equals(url, media.url)
         && Objects.equals(thumbnailUrl, media.thumbnailUrl)
-        && Objects.equals(caption, media.caption);
+        && Objects.equals(caption, media.caption)
+        && Objects.equals(carouselUrl, media.carouselUrl)
+        && Objects.equals(socialNetworks, media.socialNetworks);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, url, thumbnailUrl, caption, helpfulVotes);
+    return Objects.hash(
+        id, type, url, thumbnailUrl, caption, helpfulVotes, carouselUrl, socialNetworks
+    );
   }
 }

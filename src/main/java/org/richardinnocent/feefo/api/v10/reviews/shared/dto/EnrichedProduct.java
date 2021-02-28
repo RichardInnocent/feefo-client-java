@@ -3,7 +3,9 @@ package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import org.richardinnocent.feefo.api.util.Undocumented;
 
 /**
  * Contains details on a product. This can contain personally identifiable or business-sensitive
@@ -27,6 +29,9 @@ public class EnrichedProduct {
 
   @JsonProperty("image_url")
   private String imageUrl;
+
+  @Undocumented
+  private List<Map<String, String>> aux = new ArrayList<>();
 
   /**
    * Gets the title of the product.
@@ -153,6 +158,19 @@ public class EnrichedProduct {
    */
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  @Undocumented
+  public List<Map<String, String>> getAux() {
+    return new ArrayList<>(aux);
+  }
+
+  @Undocumented
+  public void setAux(List<Map<String, String>> aux) {
+    this.aux.clear();
+    if (aux != null) {
+      this.aux.addAll(aux);
+    }
   }
 
   @Override

@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.mapping;
+package org.richardinnocent.feefo.api.mapping.modules.time;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

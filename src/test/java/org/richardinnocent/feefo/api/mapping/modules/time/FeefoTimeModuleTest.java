@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.mapping;
+package org.richardinnocent.feefo.api.mapping.modules.time;
 
 import static org.junit.jupiter.api.Assertions.*;
 
