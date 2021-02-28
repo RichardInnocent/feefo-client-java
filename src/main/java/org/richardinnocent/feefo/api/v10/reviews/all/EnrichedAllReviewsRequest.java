@@ -214,7 +214,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
     }
 
     /**
-     * Builder fr {@link EnrichedAllReviewsRequest} objects.
+     * Builder for {@link EnrichedAllReviewsRequest} objects.
      */
     public static class FinalStageBuilder {
       private SortField sortField;
