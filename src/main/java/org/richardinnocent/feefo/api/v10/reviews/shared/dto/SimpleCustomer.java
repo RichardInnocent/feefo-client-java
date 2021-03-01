@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.v10.reviews.all.dto;
+package org.richardinnocent.feefo.api.v10.reviews.shared.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;

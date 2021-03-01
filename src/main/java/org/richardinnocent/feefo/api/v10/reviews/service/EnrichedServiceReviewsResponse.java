@@ -1,15 +1,15 @@
-package org.richardinnocent.feefo.api.v10.reviews.all;
+package org.richardinnocent.feefo.api.v10.reviews.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.richardinnocent.feefo.api.v10.reviews.all.dto.EnrichedReview;
+import org.richardinnocent.feefo.api.v10.reviews.service.dto.EnrichedReview;
 import org.richardinnocent.feefo.api.v10.reviews.shared.ReviewsResponse;
 
 /**
- * A response for an {@link EnrichedAllReviewsRequest}.
+ * A response for an {@link EnrichedServiceReviewsRequest}.
  */
-public class EnrichedAllReviewsResponse extends ReviewsResponse {
+public class EnrichedServiceReviewsResponse extends ReviewsResponse {
 
   private final List<EnrichedReview> reviews = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class EnrichedAllReviewsResponse extends ReviewsResponse {
     if (!super.equals(o)) {
       return false;
     }
-    EnrichedAllReviewsResponse that = (EnrichedAllReviewsResponse) o;
+    EnrichedServiceReviewsResponse that = (EnrichedServiceReviewsResponse) o;
     return Objects.equals(reviews, that.reviews);
   }
 

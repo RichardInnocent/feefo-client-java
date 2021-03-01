@@ -1,23 +1,23 @@
-package org.richardinnocent.feefo.api.v10.reviews.all;
+package org.richardinnocent.feefo.api.v10.reviews.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.richardinnocent.feefo.api.v10.reviews.all.dto.EnrichedReview;
+import org.richardinnocent.feefo.api.v10.reviews.service.dto.SimpleReview;
 import org.richardinnocent.feefo.api.v10.reviews.shared.ReviewsResponse;
 
 /**
- * A response for an {@link EnrichedAllReviewsRequest}.
+ * A response for a {@link SimpleServiceReviewsRequest}.
  */
-public class EnrichedAllReviewsResponse extends ReviewsResponse {
+public class SimpleServiceReviewsResponse extends ReviewsResponse {
 
-  private final List<EnrichedReview> reviews = new ArrayList<>();
+  private final List<SimpleReview> reviews = new ArrayList<>();
 
   /**
    * Gets the reviews shown on this page of results.
    * @return The reviews shown on this page of results.
    */
-  public List<EnrichedReview> getReviews() {
+  public List<SimpleReview> getReviews() {
     return new ArrayList<>(reviews);
   }
 
@@ -25,7 +25,7 @@ public class EnrichedAllReviewsResponse extends ReviewsResponse {
    * Sets the reviews shown on this page of results.
    * @param reviews The reviews shown on this page of results.
    */
-  public void setReviews(List<EnrichedReview> reviews) {
+  public void setReviews(List<SimpleReview> reviews) {
     this.reviews.clear();
     if (reviews != null) {
       this.reviews.addAll(reviews);
@@ -43,7 +43,7 @@ public class EnrichedAllReviewsResponse extends ReviewsResponse {
     if (!super.equals(o)) {
       return false;
     }
-    EnrichedAllReviewsResponse that = (EnrichedAllReviewsResponse) o;
+    SimpleServiceReviewsResponse that = (SimpleServiceReviewsResponse) o;
     return Objects.equals(reviews, that.reviews);
   }
 
