@@ -9,7 +9,7 @@ import java.util.Objects;
  * Contains product feedback information. This can contain personally identifiable or
  * business-sensitive information, so is only returned from authorised requests.
  */
-public class SimpleProductFeedback extends SimpleFeedback {
+public class SimpleProductFeedback extends Feedback {
 
   private SimpleProduct product;
 

@@ -9,7 +9,7 @@ import java.util.Objects;
  * Contains service feedback information. This can contain personally identifiable or
  * business-sensitive information, so is only returned from authorised requests.
  */
-public class SimpleServiceFeedback extends SimpleFeedback {
+public class SimpleServiceFeedback extends Feedback {
 
   private String title;
 

@@ -8,10 +8,9 @@ import java.util.Objects;
 import org.richardinnocent.feefo.api.util.Undocumented;
 
 /**
- * Contains feedback information. This will not contain personally identifiable or
- * business-sensitive information, so can be returned from unauthenticated requests.
+ * Contains feedback information.
  */
-public class SimpleFeedback {
+public abstract class Feedback {
 
   private Rating rating;
   private String id;
@@ -202,22 +201,23 @@ public class SimpleFeedback {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SimpleFeedback feedback = (SimpleFeedback) o;
-    return Objects.equals(helpfulVotes, feedback.helpfulVotes)
-        && Objects.equals(rating, feedback.rating)
+    Feedback feedback = (Feedback) o;
+    return Objects.equals(rating, feedback.rating)
         && Objects.equals(id, feedback.id)
         && Objects.equals(review, feedback.review)
         && Objects.equals(creationTime, feedback.creationTime)
+        && Objects.equals(helpfulVotes, feedback.helpfulVotes)
         && Objects.equals(media, feedback.media)
         && Objects.equals(sentiment, feedback.sentiment)
-        && Objects.equals(moderationStatus, feedback.moderationStatus);
+        && Objects.equals(socialNetworks, feedback.socialNetworks)
+        && moderationStatus == feedback.moderationStatus;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        rating, id, review, creationTime, helpfulVotes, media, sentiment, moderationStatus
+        rating, id, review, creationTime, helpfulVotes, media, sentiment, socialNetworks,
+        moderationStatus
     );
   }
-
 }
