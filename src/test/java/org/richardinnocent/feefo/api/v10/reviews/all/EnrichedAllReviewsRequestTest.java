@@ -85,6 +85,52 @@ class EnrichedAllReviewsRequestTest {
   }
 
   @Test
+  public void builder$withPage_PositivePage_SetsParameter() {
+    int page = 5;
+    EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
+        .builder()
+        .forMerchant("test-merchant")
+        .withPage(page)
+        .build();
+    Collection<QueryParameter> queryParameters = request.getQueryParameters();
+    assertEquals(2, queryParameters.size());
+    assertTrue(
+        queryParameters.contains(new QueryParameter("page", Integer.toString(page)))
+    );
+  }
+
+  @Test
+  public void builder$withPage_SmallestAllowablePage_SetsParameter() {
+    int page = 1;
+    EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
+        .builder()
+        .forMerchant("test-merchant")
+        .withPage(page)
+        .build();
+    Collection<QueryParameter> queryParameters = request.getQueryParameters();
+    assertEquals(2, queryParameters.size());
+    assertTrue(
+        queryParameters.contains(new QueryParameter("page", Integer.toString(page)))
+    );
+  }
+
+  @Test
+  public void builder$withPage_PageIsZero_ExceptionThrown() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> EnrichedAllReviewsRequest.builder().forMerchant("test-merchant").withPage(0)
+    );
+  }
+
+  @Test
+  public void builder$withPage_PageIsNegative_ExceptionThrown() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> EnrichedAllReviewsRequest.builder().forMerchant("test-merchant").withPage(-1)
+    );
+  }
+
+  @Test
   public void builder$withPageSize_Valid_SetsParameter() {
     int pageSize = 5;
     EnrichedAllReviewsRequest request = EnrichedAllReviewsRequest
@@ -872,12 +918,6 @@ class EnrichedAllReviewsRequestTest {
     );
   }
 
-  private TagFilter createTagFilter(String queryValue) {
-    TagFilter tagFilter = mock(TagFilter.class);
-    when(tagFilter.toQueryValue()).thenReturn(queryValue);
-    return tagFilter;
-  }
-
   @Test
   public void builder$withFeedbackScore_MinimumAllowedScore_ParameterSet() {
     int score = 1;
@@ -1217,6 +1257,12 @@ class EnrichedAllReviewsRequestTest {
         request.getQueryParameters()
                .contains(new QueryParameter("enhanced_insight", inclusion.getQueryValue()))
     );
+  }
+
+  private TagFilter createTagFilter(String queryValue) {
+    TagFilter tagFilter = mock(TagFilter.class);
+    when(tagFilter.toQueryValue()).thenReturn(queryValue);
+    return tagFilter;
   }
 
 }

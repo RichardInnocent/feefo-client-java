@@ -39,8 +39,12 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
       queryParameters.add(new QueryParameter("sort", builder.sortField.getQueryKey()));
     }
 
+    if (builder.page != null) {
+      queryParameters.add(new QueryParameter("page", builder.page.toString()));
+    }
+
     if (builder.pageSize != null) {
-      queryParameters.add(new QueryParameter("page_size", Integer.toString(builder.pageSize)));
+      queryParameters.add(new QueryParameter("page_size", builder.pageSize.toString()));
     }
 
     if (!builder.responseFields.isEmpty()) {
@@ -218,6 +222,7 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
      */
     public static class FinalStageBuilder {
       private SortField sortField;
+      private Integer page;
       private Integer pageSize;
       private final Collection<String> responseFields = new ArrayList<>();
 
@@ -262,6 +267,20 @@ public class EnrichedAllReviewsRequest extends FeefoApiGetRequest<EnrichedAllRev
        */
       public FinalStageBuilder withSortField(SortField sortField) {
         this.sortField = sortField;
+        return this;
+      }
+
+      /**
+       * Specifies the page of results that should be returned from this request.
+       * @param page The page of results to retrieve.
+       * @return This builder.
+       * @throws IllegalArgumentException Thrown if {@code page < 1}.
+       */
+      public FinalStageBuilder withPage(int page) throws IllegalArgumentException {
+        if (page < 1) {
+          throw new IllegalArgumentException("Page must be positive but is " + page);
+        }
+        this.page = page;
         return this;
       }
 
