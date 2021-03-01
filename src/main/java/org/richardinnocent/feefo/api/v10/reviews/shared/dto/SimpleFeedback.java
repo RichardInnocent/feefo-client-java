@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.richardinnocent.feefo.api.util.Undocumented;
 
 /**
  * Contains feedback information. This will not contain personally identifiable or
@@ -25,6 +26,14 @@ public class SimpleFeedback {
   private final List<Media> media = new ArrayList<>();
 
   private Sentiment sentiment;
+
+  @Undocumented
+  @JsonProperty("social")
+  private SocialNetworks socialNetworks;
+
+  @Undocumented
+  @JsonProperty("moderation_status")
+  private ModerationStatus moderationStatus;
 
   /**
    * Gets the rating that was assigned to the feedback.
@@ -145,6 +154,46 @@ public class SimpleFeedback {
     this.sentiment = sentiment;
   }
 
+  /**
+   * Gets the moderation status of the feedback. This indicates whether the review is available
+   * to the public.
+   * @return The moderation status of the feedback.
+   * @see ModerationStatus
+   */
+  @Undocumented
+  public ModerationStatus getModerationStatus() {
+    return moderationStatus;
+  }
+
+  /**
+   * Sets the moderation status of the feedback. This indicates whether the review is available
+   * to the public.
+   * @param moderationStatus The moderation status of the feedback.
+   * @see ModerationStatus
+   */
+  @Undocumented
+  public void setModerationStatus(ModerationStatus moderationStatus) {
+    this.moderationStatus = moderationStatus;
+  }
+
+  /**
+   * Gets the social network share links for this feedback.
+   * @return The social network share links for this feedback.
+   */
+  @Undocumented
+  public SocialNetworks getSocialNetworks() {
+    return socialNetworks;
+  }
+
+  /**
+   * Sets the social network share links for this feedback.
+   * @param socialNetworks The social network share links for this feedback.
+   */
+  @Undocumented
+  public void setSocialNetworks(SocialNetworks socialNetworks) {
+    this.socialNetworks = socialNetworks;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -160,12 +209,15 @@ public class SimpleFeedback {
         && Objects.equals(review, feedback.review)
         && Objects.equals(creationTime, feedback.creationTime)
         && Objects.equals(media, feedback.media)
-        && Objects.equals(sentiment, feedback.sentiment);
+        && Objects.equals(sentiment, feedback.sentiment)
+        && Objects.equals(moderationStatus, feedback.moderationStatus);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rating, id, review, creationTime, helpfulVotes, media, sentiment);
+    return Objects.hash(
+        rating, id, review, creationTime, helpfulVotes, media, sentiment, moderationStatus
+    );
   }
 
 }

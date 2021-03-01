@@ -120,6 +120,22 @@ public class SimpleReview {
   }
 
   /**
+   * Gets the details of the customer that left the review.
+   * @return The details of the customer that left the review.
+   */
+  public SimpleCustomer getCustomer() {
+    return customer;
+  }
+
+  /**
+   * Sets the details of the customer that left the review.
+   * @param customer The details of the customer that left the review.
+   */
+  public void setCustomer(SimpleCustomer customer) {
+    this.customer = customer;
+  }
+
+  /**
    * Gets the feedback for the service.
    * @return The feedback for the service.
    */
