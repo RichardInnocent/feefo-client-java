@@ -1,4 +1,4 @@
-package org.richardinnocent.feefo.api.v10.reviews.service;
+package org.richardinnocent.feefo.api.v10.reviews.nps;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.time.OffsetDateTime;
@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.richardinnocent.feefo.api.requests.EqualityOperator;
 import org.richardinnocent.feefo.api.requests.FeefoApiGetRequest;
 import org.richardinnocent.feefo.api.requests.QueryParameter;
-import org.richardinnocent.feefo.api.v10.reviews.service.EnrichedServiceReviewsRequest.Builder.FinalStageBuilder;
-import org.richardinnocent.feefo.api.v10.reviews.service.params.SortField;
+import org.richardinnocent.feefo.api.v10.reviews.nps.NpsReviewsRequest.Builder.FinalStageBuilder;
+import org.richardinnocent.feefo.api.v10.reviews.nps.params.SortField;
 import org.richardinnocent.feefo.api.v10.reviews.shared.Comparison;
 import org.richardinnocent.feefo.api.v10.reviews.shared.params.Inclusion;
 import org.richardinnocent.feefo.api.v10.reviews.shared.params.MediaInclusion;
@@ -20,13 +20,19 @@ import org.richardinnocent.feefo.api.v10.reviews.shared.params.TagFilter;
 import org.richardinnocent.feefo.api.v10.reviews.shared.params.TimeFrame;
 import org.richardinnocent.feefo.api.v10.reviews.shared.params.UnansweredFeedbackInclusion;
 
-public class EnrichedServiceReviewsRequest
-    extends FeefoApiGetRequest<EnrichedServiceReviewsResponse> {
+/**
+ * Retrieves customer feedback details with NPS content. The response will contain
+ * personally-identifiable or business-sensitive information, so authorisation not required.
+ */
+public class NpsReviewsRequest extends FeefoApiGetRequest<NpsReviewsResponse> {
+
+  private static final TypeReference<NpsReviewsResponse> RESPONSE_TYPE =
+      new TypeReference<NpsReviewsResponse>() {};
 
   private final Collection<QueryParameter> queryParameters = new ArrayList<>();
 
-  private EnrichedServiceReviewsRequest(FinalStageBuilder builder) {
-    super(new TypeReference<EnrichedServiceReviewsResponse>(){});
+  private NpsReviewsRequest(FinalStageBuilder builder) {
+    super(RESPONSE_TYPE);
     buildQueryParameters(builder);
   }
 
@@ -161,15 +167,11 @@ public class EnrichedServiceReviewsRequest
           new QueryParameter("enhanced_insight", builder.enhancedInsightInclusion.getQueryValue())
       );
     }
-
-    if (builder.feature != null) {
-      queryParameters.add(new QueryParameter("feature", builder.feature));
-    }
   }
 
   @Override
   protected String getBasePath() {
-    return "/10/reviews/service";
+    return "/10/reviews/nps";
   }
 
   @Override
@@ -183,7 +185,7 @@ public class EnrichedServiceReviewsRequest
   }
 
   /**
-   * Creates a new builder for creating {@link EnrichedServiceReviewsRequest} objects.
+   * Creates a new builder for creating {@link NpsReviewsRequest} objects.
    * @return A new builder.
    */
   public static Builder builder() {
@@ -191,7 +193,7 @@ public class EnrichedServiceReviewsRequest
   }
 
   /**
-   * Builder for {@link EnrichedServiceReviewsRequest} objects.
+   * Builder for {@link NpsReviewsRequest} objects.
    */
   public static class Builder {
 
@@ -210,7 +212,7 @@ public class EnrichedServiceReviewsRequest
     }
 
     /**
-     * Builder for {@link EnrichedServiceReviewsRequest} objects.
+     * Builder for {@link NpsReviewsRequest} objects.
      */
     public static class FinalStageBuilder {
       private SortField sortField;
@@ -239,7 +241,6 @@ public class EnrichedServiceReviewsRequest
       private UnansweredFeedbackInclusion unansweredFeedbackInclusion;
       private Inclusion fullThreadInclusion;
       private Inclusion enhancedInsightInclusion;
-      private String feature;
 
       private FinalStageBuilder(String merchantIdentifier)
           throws NullPointerException, IllegalArgumentException {
@@ -764,28 +765,12 @@ public class EnrichedServiceReviewsRequest
       }
 
       /**
-       * <p>Specifies that only feedback containing the specified "feature" in the review. Features
-       * are particular comments of interest within a review. For example, specifying "delivery"
-       * will return reviews that discuss the delivery.</p>
-       * <p>Only valid for merchants with the
-       * <a href="https://www.feefo.com/en/business/products/smart-themes">Smart Themes</a> package
-       * enabled.</p>
-       * @param feature The feature to search for.
-       * @return This builder.
-       */
-      public FinalStageBuilder withFeature(String feature) {
-        this.feature = feature;
-        return this;
-      }
-
-      /**
        * Builds the request.
        * @return The request.
        */
-      public EnrichedServiceReviewsRequest build() {
-        return new EnrichedServiceReviewsRequest(this);
+      public NpsReviewsRequest build() {
+        return new NpsReviewsRequest(this);
       }
     }
   }
-  
 }
