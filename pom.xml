@@ -14,6 +14,14 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <developers>
+    <developer>
+      <name>Richard Innocent</name>
+      <organization>Richard Innocent</organization>
+      <organizationUrl>richardinnocent.org</organizationUrl>
+    </developer>
+  </developers>
+
   <build>
     <plugins>
       <plugin>
